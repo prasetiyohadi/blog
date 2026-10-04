@@ -1,11 +1,8 @@
-![Build Status](https://gitlab.com/prasetiyohadi/blog/badges/master/build.svg)
+![Build Status](https://github.com/prasetiyohadi/blog/actions/workflows/hugo-deploy.yml/badge.svg)
 
 ---
 
-My [Hugo] website using GitLab Pages.
-
-Learn more about GitLab Pages at https://pages.gitlab.io and the official
-documentation https://docs.gitlab.com/ce/user/project/pages/.
+My [Hugo] website, built and deployed by GitHub Actions to GitHub Pages.
 
 ---
 
@@ -13,25 +10,31 @@ documentation https://docs.gitlab.com/ce/user/project/pages/.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [GitLab CI](#gitlab-ci)
+- [GitHub Actions](#github-actions)
 - [Building locally](#building-locally)
-- [GitLab User or Group Pages](#gitlab-user-or-group-pages)
+- [Custom domain](#custom-domain)
 - [Did you fork this project?](#did-you-fork-this-project)
 - [Troubleshooting](#troubleshooting)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## GitLab CI
+## GitHub Actions
 
-This project's static Pages are built by [GitLab CI][ci], following the steps
-defined in [`.gitlab-ci.yml`](.gitlab-ci.yml).
+This project's static Pages are built and deployed by [GitHub Actions][ci],
+following the steps defined in
+[`.github/workflows/hugo-deploy.yml`](.github/workflows/hugo-deploy.yml) on
+every push to `master`. Any other branch or pull request only builds the
+site to confirm it still builds; it does not deploy.
+
+Moved here from GitLab CI/GitLab Pages; see `git log` history before this
+migration for the old `.gitlab-ci.yml`.
 
 ## Building locally
 
 To work locally with this project, you'll have to follow the steps below:
 
 1. Fork, clone or download this project
-1. [Install][] Hugo
+1. [Install][] Hugo (see `devbox.json` for the pinned version)
 1. Preview your project: `hugo server`
 1. Add content
 1. Generate the website: `hugo` (optional)
@@ -41,22 +44,15 @@ Read more at Hugo's [documentation][].
 ### Preview your site
 
 If you clone or download this project to your local computer and run `hugo server`,
-your site can be accessed under `localhost:1313/hugo/`.
+your site can be accessed under `localhost:1313/`.
 
-The theme used is adapted from http://themes.gohugo.io/ghostwriter/.
+The theme used is `hugo-profile`, vendored under `themes/hugo-profile`.
 
-## GitLab User or Group Pages
+## Custom domain
 
-To use this project as your user/group website, you will need one additional
-step: just rename your project to `namespace.gitlab.io`, where `namespace` is
-your `username` or `groupname`. This can be done by navigating to your
-project's **Settings**.
-
-You'll need to configure your site too: change this line
-in your `config.toml`, from `"https://prasetiyohadi.gitlab.io/blog/"` to `baseurl = "https://namespace.gitlab.io"`.
-Proceed equally if you are using a [custom domain][post]: `baseurl = "http(s)://example.com"`.
-
-Read more about [user/group Pages][userpages] and [project Pages][projpages].
+The site is served at a custom domain (`static/CNAME`), configured in this
+repo's **Settings → Pages**. GitHub Pages must have its source set to
+**GitHub Actions** for the workflow's deploy step to take effect.
 
 ## Did you fork this project?
 
@@ -72,10 +68,7 @@ unless you want to contribute back to the upstream project.
     your static generator has a configuration option that needs to be explicitly
     set in order to serve static assets under a relative URL.
 
-[ci]: https://about.gitlab.com/gitlab-ci/
+[ci]: https://github.com/features/actions
 [hugo]: https://gohugo.io
 [install]: https://gohugo.io/overview/installing/
 [documentation]: https://gohugo.io/overview/introduction/
-[userpages]: http://doc.gitlab.com/ee/pages/README.html#user-or-group-pages
-[projpages]: http://doc.gitlab.com/ee/pages/README.html#project-pages
-[post]: https://about.gitlab.com/2016/04/07/gitlab-pages-setup/#custom-domains

@@ -3,6 +3,10 @@ title: "Day 2 with my custom build NAS server for the homelab"
 date: 2026-10-01T20:00:00+07:00
 tags: ["homelab", "truenas", "proxmox", "zfs", "backup", "incus"]
 draft: false
+cover:
+  image: "/images/2026-10-01-nas-click-noise-pbs-backup-gap.header.png"
+  alt: "Proxmox Backup Server task log: excluding bind mount point mp0 from backup (not a volume), followed by TASK OK"
+  relative: false
 ---
 
 ## Symptom

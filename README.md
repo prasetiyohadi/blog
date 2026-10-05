@@ -35,6 +35,7 @@ To work locally with this project, you'll have to follow the steps below:
 
 1. Fork, clone or download this project
 1. [Install][] Hugo (see `devbox.json` for the pinned version)
+1. Fetch the theme: `bash scripts/fetch-theme.sh`
 1. Preview your project: `hugo server`
 1. Add content
 1. Generate the website: `hugo` (optional)
@@ -46,7 +47,16 @@ Read more at Hugo's [documentation][].
 If you clone or download this project to your local computer and run `hugo server`,
 your site can be accessed under `localhost:1313/`.
 
-The theme used is `hugo-profile`, vendored under `themes/hugo-profile`.
+The theme is [PaperMod][papermod], pinned to a commit in
+`scripts/fetch-theme.sh`. It is not committed; run the script once before
+`hugo server` (CI runs it before every build):
+
+```bash
+bash scripts/fetch-theme.sh
+```
+
+The theme was switched from `hugo-profile` (a portfolio theme) to PaperMod for
+a posts-first layout with search, a table of contents and code-copy buttons.
 
 ## Custom domain
 
@@ -69,6 +79,7 @@ unless you want to contribute back to the upstream project.
     set in order to serve static assets under a relative URL.
 
 [ci]: https://github.com/features/actions
+[papermod]: https://github.com/adityatelange/hugo-PaperMod
 [hugo]: https://gohugo.io
 [install]: https://gohugo.io/overview/installing/
 [documentation]: https://gohugo.io/overview/introduction/

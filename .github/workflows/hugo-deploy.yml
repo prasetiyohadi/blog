@@ -28,6 +28,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Fetch PaperMod theme
+        run: bash scripts/fetch-theme.sh
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:

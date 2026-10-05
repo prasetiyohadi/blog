@@ -1,0 +1,2 @@
+{{- $lang := .Type | default "text" -}}
+{{- transform.Highlight .Inner $lang .Options -}}

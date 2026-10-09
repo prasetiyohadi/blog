@@ -1,0 +1,120 @@
+/*
+ * Pras' Labs design system, applied to PaperMod.
+ * Source: project/tokens.json of the "Pras' Labs" design system artifact.
+ * Step 1 of the blog update: color tokens, type families, reading column,
+ * links and focus. Code blocks (syntax colors) and the Nav, hero and post
+ * list come in later steps.
+ *
+ * PaperMod picks the theme with :root[data-theme="dark"]; light is the default.
+ */
+
+:root {
+    /* PaperMod variables, light */
+    --theme: #fbf9f4;           /* bg */
+    --entry: #ffffff;           /* surface */
+    --primary: #1c1a15;         /* text-primary */
+    --secondary: #625b4c;       /* text-secondary */
+    --tertiary: #cecbc7;        /* border-strong over bg, as a solid color */
+    --content: #1c1a15;         /* text-primary */
+    --code-bg: #ece7dc;         /* code-bg-inline */
+    --border: #1b181414;        /* border-hairline */
+    --main-width: 700px;        /* content-width */
+
+    /* Design system tokens, light */
+    --pl-text-tertiary: #6f6757;
+    --pl-accent: #0b6f63;
+    --pl-accent-strong: #084f47;
+    --pl-focus-ring: #0b6f63;
+
+    /* Families */
+    --pl-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --pl-body: 'Source Serif 4', ui-serif, Georgia, serif;
+    --pl-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+:root[data-theme="dark"] {
+    --theme: #15130f;
+    --entry: #201c17;
+    --primary: #eee7da;
+    --secondary: #a79e8e;
+    --tertiary: #403d37;
+    --content: #eee7da;
+    --code-block-bg: #0e0c09;   /* code-bg; light keeps PaperMod's dark block until syntax colors are themed */
+    --code-bg: #28221a;
+    --border: #ede6d91a;
+
+    --pl-text-tertiary: #8d8474;
+    --pl-accent: #35d0c0;
+    --pl-accent-strong: #57e0d2;
+    --pl-focus-ring: #35d0c0;
+}
+
+/* Families: heading family for headings and UI, serif for article prose only, mono for code and tags */
+body {
+    font-family: var(--pl-heading);
+}
+
+.post-content {
+    font-family: var(--pl-body);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6,
+.post-title,
+.entry-header h2 {
+    font-family: var(--pl-heading);
+    letter-spacing: -0.02em;
+}
+
+code, pre, kbd, samp,
+.post-tags a,
+.logo a {
+    font-family: var(--pl-mono);
+}
+
+/* Display sizes, fluid. Body text does not shrink. */
+.post-title,
+.page-header h1 {
+    font-size: clamp(32px, 3vw + 20px, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.md-content h2 { font-size: clamp(26px, 2vw + 18px, 36px); font-weight: 700; line-height: 1.15; }
+.md-content h3 { font-size: clamp(22px, 1vw + 18px, 28px); font-weight: 600; line-height: 1.35; }
+
+/* Metadata: text-tertiary on bg only */
+.post-meta,
+.post-meta a {
+    color: var(--pl-text-tertiary);
+}
+
+/* Links: accent marks things you can act on */
+.md-content a:not(.anchor) {
+    color: var(--pl-accent);
+    text-decoration-thickness: 1px;
+    transition: color 150ms ease, border-color 150ms ease;
+}
+
+@media (hover: hover) {
+    .md-content a:not(.anchor):hover {
+        color: var(--pl-accent-strong);
+    }
+}
+
+/* Focus: 2px ring, 2px offset, never removed without a replacement */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--pl-focus-ring);
+    outline-offset: 2px;
+}
+
+/* Wide content scrolls inside its own box */
+.md-content table,
+.md-content .highlight {
+    max-width: 100%;
+}

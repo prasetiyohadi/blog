@@ -30,28 +30,18 @@ markup:
     noClasses: false
     lineNos: false
 
+# Main menu: Posts and About. Search is a field in the Nav (layouts/partials/header.html).
+# Archive and Tags are in the footer (params.footer.text below).
 menus:
   main:
     - identifier: posts
       name: Posts
       url: /blogs/
       weight: 10
-    - identifier: archives
-      name: Archive
-      url: /archives/
-      weight: 20
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 30
-    - identifier: search
-      name: Search
-      url: /search/
-      weight: 40
     - identifier: about
       name: About
       url: /about/
-      weight: 50
+      weight: 20
 
 params:
   env: production
@@ -71,6 +61,10 @@ params:
 
   label:
     text: "pras-labs"
+
+  # PaperMod prints this between the copyright and "Powered by".
+  footer:
+    text: "[Archive](/archives/) · [Tags](/tags/)"
 
   assets:
     favicon: "/favicon.png"

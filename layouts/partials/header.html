@@ -1,6 +1,7 @@
 {{- /*
-  Pras' Labs Nav: terminal wordmark, the site menu, and one text button that switches the theme.
+  Pras' Labs Nav: terminal wordmark, the site menu, a search field and one text button that switches the theme.
   Replaces PaperMod's header. No icons, no language switch (the site is single-language).
+  The search field submits to /search/?q=... (see assets/js/fastsearch.js).
   The theme button is the last item in the menu row, labeled with the current theme.
 */ -}}
 {{- $label := site.Params.label.text | default site.Title -}}
@@ -12,16 +13,21 @@
             {{- range site.Menus.main }}
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL)) | absLangURL }}
             {{- $page_url := $currentPage.Permalink | absLangURL }}
-            {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
             {{- $is_current := eq $menu_item_url $page_url }}
             <li>
-                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}{{ if $is_search }} (Alt + /){{ end }}"
-                    {{- if $is_search }} accesskey="/"{{ end }}
+                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}"
                     {{- if $is_current }} aria-current="page"{{ end }}>
                     <span {{- if $is_current }} class="active"{{ end }}>{{ .Pre }}{{ .Name }}{{ .Post }}</span>
                 </a>
             </li>
             {{- end }}
+            <li>
+                <form class="pl-search-form" role="search" action="{{ "search/" | relLangURL }}" method="get">
+                    <label class="pl-search">
+                        <input type="search" name="q" placeholder="Search" aria-label="Search posts" title="Search posts (Alt + /)" accesskey="/" autocomplete="off" maxlength="64">
+                    </label>
+                </form>
+            </li>
             {{- if not site.Params.disableThemeToggle }}
             <li>
                 <button id="theme-toggle" class="theme-toggle" type="button" accesskey="t" title="(Alt + T)" hidden><span>Theme</span></button>

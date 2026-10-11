@@ -1,0 +1,28 @@
+/*
+ * Pras' Labs design system, footer links.
+ * The design system has no Footer component yet. This keeps PaperMod's footer
+ * and gives its links the same 44px hit area as the Nav. Archive and Tags
+ * live here (params.footer.text in hugo.yaml) instead of in the Nav.
+ */
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 4px;
+    font-size: 13px;
+}
+
+.footer a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 4px;
+}
+
+.footer p {
+    margin: 0;
+}

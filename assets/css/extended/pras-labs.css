@@ -21,6 +21,7 @@
 
     /* Design system tokens, light */
     --pl-text-tertiary: #6f6757;
+    --pl-border-control: #1b18148c;   /* boundary of a control, 3:1 or better */
     --pl-accent: #0b6f63;
     --pl-accent-strong: #084f47;
     --pl-focus-ring: #0b6f63;
@@ -41,6 +42,7 @@
     --border: #ede6d91a;
 
     --pl-text-tertiary: #8d8474;
+    --pl-border-control: #ede6d966;
     --pl-accent: #35d0c0;
     --pl-accent-strong: #57e0d2;
     --pl-focus-ring: #35d0c0;

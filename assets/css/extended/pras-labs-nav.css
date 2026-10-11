@@ -1,6 +1,7 @@
 /*
  * Pras' Labs design system, step 4: Nav.
- * Source: the Nav component and "Theme switching" section of the design system.
+ * Source: the Nav component and "Theme switching" section of the design system,
+ * plus a search field the design system does not define yet.
  * Markup is in layouts/partials/header.html. The wordmark is set in mono with the
  * ~/ prefix in the accent color. Links and the theme button are at least 44px
  * tall and wide. The bar is static, with a hairline rule below it.
@@ -87,6 +88,42 @@
     font-weight: inherit;
     text-decoration: none;
     border-bottom-color: var(--pl-accent);
+}
+
+/* Search field: the label is the 44px hit area, the input is 36px inside it */
+.header-nav .pl-search-form {
+    margin: 0;
+}
+
+.header-nav .pl-search {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 4px 0;
+    cursor: text;
+}
+
+.header-nav .pl-search input {
+    box-sizing: border-box;
+    width: 9.5rem;
+    height: 36px;
+    padding: 0 10px;
+    color: var(--primary);
+    background: var(--entry);
+    border: 1px solid var(--pl-border-control);
+    border-radius: 4px;
+    font-family: var(--pl-heading);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.35;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.header-nav .pl-search input::placeholder {
+    color: var(--pl-text-tertiary);
+    opacity: 1;
 }
 
 @media (hover: hover) {

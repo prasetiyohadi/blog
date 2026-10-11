@@ -1,0 +1,202 @@
+/*
+ * Pras' Labs design system, step 2: code blocks and inline code.
+ * Source: code-* tokens and the CodeBlock component of the "Pras' Labs"
+ * design system artifact. Four hues on warm neutrals:
+ *   clay (keyword, tag), olive (string), blue (function, key), ochre (number).
+ * Both themes get the design system's own code background, so a block is
+ * dark in dark mode and light in light mode.
+ *
+ * Not in this step: the filename header bar, which needs a markup change.
+ */
+
+:root {
+    --pl-code-bg: #f4f1ec;
+    --pl-code-bg-inline: #ece7dc;
+    --pl-code-border: #1b181422;
+    --pl-code-fg: #2a281f;
+    --pl-code-keyword: #9c433f;
+    --pl-code-string: #546221;
+    --pl-code-function: #056180;
+    --pl-code-comment: #6f6757;
+    --pl-code-number: #745519;
+    --pl-code-punct: #625b4c;
+    --pl-danger: #a23f2a;
+    --pl-success: #3f7a34;
+    --pl-code-hl: #1b18140d;
+
+    /* PaperMod reads this for both the block and its inner <code> */
+    --code-block-bg: var(--pl-code-bg);
+    --code-bg: var(--pl-code-bg-inline);
+}
+
+:root[data-theme="dark"] {
+    --pl-code-bg: #0e0c09;
+    --pl-code-bg-inline: #28221a;
+    --pl-code-border: #3b342999;
+    --pl-code-fg: #d7d3c9;
+    --pl-code-keyword: #d5908a;
+    --pl-code-string: #aebc86;
+    --pl-code-function: #80b3cc;
+    --pl-code-comment: #8d8474;
+    --pl-code-number: #e3be80;
+    --pl-code-punct: #a79e8e;
+    --pl-danger: #e0806b;
+    --pl-success: #8fbf7f;
+    --pl-code-hl: #ede6d90f;
+
+    /* PaperMod sets these on :root[data-theme="dark"] too, so repeat them at the same specificity */
+    --code-block-bg: var(--pl-code-bg);
+    --code-bg: var(--pl-code-bg-inline);
+}
+
+/* Inline code: one color, warm background, same size as block code */
+.post-content code {
+    font-size: 0.82em;
+    padding: 0.15em 0.35em;
+    border-radius: 4px;
+}
+
+/* Block frame */
+.md-content .highlight:not(table) {
+    border: 1px solid var(--pl-code-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* The <pre> is the scroller (Hugo gives it tabindex="0"), so a keyboard user can scroll it */
+.md-content .highlight pre.chroma {
+    overflow-x: auto;
+    margin: 0;
+    color: var(--pl-code-fg);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.md-content .highlight pre.chroma:focus-visible {
+    outline-offset: -2px;
+}
+
+.md-content .highlight pre.chroma code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    overflow: visible;
+    padding: 16px 18px;
+    color: var(--pl-code-fg);
+    font-size: inherit;
+    line-height: inherit;
+    word-break: normal;
+    border-radius: 0;
+}
+
+.md-content .highlight pre.chroma .line .cl,
+.md-content .chroma .ln {
+    padding: 0;
+}
+
+.md-content .chroma { color: var(--pl-code-fg); }
+
+/* Keywords and markup: clay. Constants (true, false, null) read as values: ochre. */
+.md-content .chroma .k,
+.md-content .chroma .kd,
+.md-content .chroma .kn,
+.md-content .chroma .kp,
+.md-content .chroma .kr,
+.md-content .chroma .kt { color: var(--pl-code-keyword); }
+.md-content .chroma .kc { color: var(--pl-code-number); }
+
+/* Functions, commands, builtins, keys and attribute names: blue */
+.md-content .chroma .nf,
+.md-content .chroma .fm,
+.md-content .chroma .nb,
+.md-content .chroma .bp,
+.md-content .chroma .nc,
+.md-content .chroma .nn,
+.md-content .chroma .nd,
+.md-content .chroma .na,
+.md-content .chroma .nt,
+.md-content .chroma .nl,
+.md-content .chroma .nx { color: var(--pl-code-function); }
+
+/* Strings: olive */
+.md-content .chroma .s,
+.md-content .chroma .sa,
+.md-content .chroma .sb,
+.md-content .chroma .sc,
+.md-content .chroma .dl,
+.md-content .chroma .sd,
+.md-content .chroma .s1,
+.md-content .chroma .s2,
+.md-content .chroma .se,
+.md-content .chroma .sh,
+.md-content .chroma .si,
+.md-content .chroma .sx,
+.md-content .chroma .sr,
+.md-content .chroma .ss { color: var(--pl-code-string); }
+
+/* Numbers and literals: ochre */
+.md-content .chroma .m,
+.md-content .chroma .mb,
+.md-content .chroma .mf,
+.md-content .chroma .mh,
+.md-content .chroma .mi,
+.md-content .chroma .mo,
+.md-content .chroma .il,
+.md-content .chroma .l,
+.md-content .chroma .ld,
+.md-content .chroma .no { color: var(--pl-code-number); }
+
+/* Comments: tertiary text color, italic, so they differ from punctuation by style as well as lightness */
+.md-content .chroma .c,
+.md-content .chroma .c1,
+.md-content .chroma .ch,
+.md-content .chroma .cm,
+.md-content .chroma .cp,
+.md-content .chroma .cpf,
+.md-content .chroma .cs {
+    color: var(--pl-code-comment);
+    font-style: italic;
+}
+
+/* Punctuation and operators */
+.md-content .chroma .o,
+.md-content .chroma .ow,
+.md-content .chroma .p { color: var(--pl-code-punct); }
+
+/* Variables and plain names stay the default code color; lexer errors do not get a color */
+.md-content .chroma .n,
+.md-content .chroma .nv,
+.md-content .chroma .vc,
+.md-content .chroma .vg,
+.md-content .chroma .vi,
+.md-content .chroma .vm,
+.md-content .chroma .err {
+    color: inherit;
+    background: none;
+}
+
+/* Diffs and shell sessions */
+.md-content .chroma .gd { color: var(--pl-danger); background: none; }
+.md-content .chroma .gi { color: var(--pl-success); background: none; }
+.md-content .chroma .gh,
+.md-content .chroma .gu { color: var(--pl-code-function); }
+.md-content .chroma .gp { color: var(--pl-code-comment); }
+.md-content .chroma .go { color: var(--pl-code-punct); }
+
+.md-content .chroma .hl { background-color: var(--pl-code-hl); }
+.md-content .chroma .lnt,
+.md-content .chroma .ln { color: var(--pl-code-comment); }
+
+/* Copy button: same palette as the block it sits on */
+.copy-code {
+    top: 8px;
+    right: 8px;
+    padding: 2px 8px;
+    color: var(--pl-code-punct);
+    background: var(--pl-code-bg);
+    border: 1px solid var(--pl-code-border);
+    border-radius: 4px;
+    font-family: var(--pl-mono);
+    font-size: 13px;
+    line-height: 1.5;
+}

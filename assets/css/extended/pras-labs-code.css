@@ -6,7 +6,8 @@
  * Both themes get the design system's own code background, so a block is
  * dark in dark mode and light in light mode.
  *
- * Not in this step: the filename header bar, which needs a markup change.
+ * The optional filename header bar and the scroller's accessible name come from
+ * layouts/_markup/render-codeblock.html. Add title="reconcile.sh" to a fence to get the bar.
  */
 
 :root {
@@ -187,9 +188,35 @@
 .md-content .chroma .lnt,
 .md-content .chroma .ln { color: var(--pl-code-comment); }
 
-/* Copy button: same palette as the block it sits on */
+/* Filename header bar: only on fences with a title */
+.pl-code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    padding: 8px 76px 8px 14px;   /* right padding leaves room for the copy button */
+    border-bottom: 1px solid var(--pl-code-border);
+    color: var(--pl-text-tertiary);
+    font-family: var(--pl-mono);
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.pl-code-file {
+    overflow-wrap: anywhere;
+}
+
+.pl-code-lang {
+    flex: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Copy button: same palette as the block it sits on, 44px hit area, shown wherever it can be reached.
+   PaperMod shows it on hover only, which leaves out touch and keyboard users. */
 .copy-code {
-    top: 8px;
+    top: 9px;
     right: 8px;
     padding: 2px 8px;
     color: var(--pl-code-punct);
@@ -199,4 +226,22 @@
     font-family: var(--pl-mono);
     font-size: 13px;
     line-height: 1.5;
+}
+
+.copy-code::before {
+    content: "";
+    position: absolute;
+    inset: -9px 0;
+}
+
+/* Keyboard: focusing the scroller reveals the button, which is then next in tab order */
+div.highlight:focus-within .copy-code {
+    display: block;
+}
+
+/* Touch: there is no hover, so the button is always there */
+@media (hover: none) {
+    .copy-code {
+        display: block;
+    }
 }

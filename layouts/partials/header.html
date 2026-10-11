@@ -1,0 +1,53 @@
+{{- /*
+  Pras' Labs Nav: terminal wordmark, the site menu, a search field and one text button that switches the theme.
+  Replaces PaperMod's header. No icons, no language switch (the site is single-language).
+  The search field submits to /search/?q=... (see assets/js/fastsearch.js).
+  The theme button is the last item in the menu row, labeled with the current theme.
+*/ -}}
+{{- $label := site.Params.label.text | default site.Title -}}
+{{- $currentPage := . -}}
+<header class="header">
+    <nav class="header-nav" aria-label="Main">
+        <a class="pl-wordmark" href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label }} (Alt + H)"><span aria-hidden="true">~/</span>{{ $label }}</a>
+        <ul id="menu" class="menu">
+            {{- range site.Menus.main }}
+            {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL)) | absLangURL }}
+            {{- $page_url := $currentPage.Permalink | absLangURL }}
+            {{- $is_current := eq $menu_item_url $page_url }}
+            <li>
+                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}"
+                    {{- if $is_current }} aria-current="page"{{ end }}>
+                    <span {{- if $is_current }} class="active"{{ end }}>{{ .Pre }}{{ .Name }}{{ .Post }}</span>
+                </a>
+            </li>
+            {{- end }}
+            <li>
+                <form class="pl-search-form" role="search" action="{{ "search/" | relLangURL }}" method="get">
+                    <label class="pl-search">
+                        <input type="search" name="q" placeholder="Search" aria-label="Search posts" title="Search posts (Alt + /)" accesskey="/" autocomplete="off" maxlength="64">
+                    </label>
+                </form>
+            </li>
+            {{- if not site.Params.disableThemeToggle }}
+            <li>
+                <button id="theme-toggle" class="theme-toggle" type="button" accesskey="t" title="(Alt + T)" hidden><span>Theme</span></button>
+                <script>
+                    (function () {
+                        var b = document.getElementById('theme-toggle');
+                        if (!b) return;
+                        var root = document.documentElement;
+                        function update() {
+                            var dark = root.dataset.theme === 'dark';
+                            b.firstElementChild.textContent = dark ? 'Theme: Dark' : 'Theme: Light';
+                            b.setAttribute('aria-label', dark ? 'Theme: Dark. Switch to light.' : 'Theme: Light. Switch to dark.');
+                        }
+                        update();
+                        b.hidden = false;
+                        new MutationObserver(update).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+                    })();
+                </script>
+            </li>
+            {{- end }}
+        </ul>
+    </nav>
+</header>

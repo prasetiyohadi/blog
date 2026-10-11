@@ -1,0 +1,146 @@
+/*
+ * Pras' Labs design system, step 4: Nav.
+ * Source: the Nav component and "Theme switching" section of the design system,
+ * plus a search field the design system does not define yet.
+ * Markup is in layouts/partials/header.html. The wordmark is set in mono with the
+ * ~/ prefix in the accent color. Links and the theme button are at least 44px
+ * tall and wide. The bar is static, with a hairline rule below it.
+ */
+
+.header {
+    border-bottom: 1px solid var(--border);
+}
+
+.header-nav {
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    line-height: 1.35;
+}
+
+.header-nav .pl-wordmark {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--primary);
+    font-family: var(--pl-mono);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.header-nav .pl-wordmark span {
+    color: var(--pl-accent);
+}
+
+/* The link group wraps instead of scrolling, so a long label or a bigger font never pushes it off the page */
+.header-nav .menu {
+    flex-wrap: wrap;
+    column-gap: 16px;
+    overflow: visible;
+    white-space: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav .menu a,
+.header-nav .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 44px;
+    min-height: 44px;
+    color: var(--secondary);
+    font-family: var(--pl-heading);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.header-nav .theme-toggle {
+    padding: 0 2px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.theme-toggle[hidden] {
+    display: none;
+}
+
+.header-nav .menu a span,
+.header-nav .theme-toggle span {
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+
+/* Current page: primary text and a 2px accent rule */
+.header-nav .menu a[aria-current="page"] {
+    color: var(--primary);
+}
+
+.header-nav .menu .active {
+    font-weight: inherit;
+    text-decoration: none;
+    border-bottom-color: var(--pl-accent);
+}
+
+/* Search field: the label is the 44px hit area, the input is 36px inside it */
+.header-nav .pl-search-form {
+    margin: 0;
+}
+
+.header-nav .pl-search {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 4px 0;
+    cursor: text;
+}
+
+.header-nav .pl-search input {
+    box-sizing: border-box;
+    width: 9.5rem;
+    height: 36px;
+    padding: 0 10px;
+    color: var(--primary);
+    background: var(--entry);
+    border: 1px solid var(--pl-border-control);
+    border-radius: 4px;
+    font-family: var(--pl-heading);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.35;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.header-nav .pl-search input::placeholder {
+    color: var(--pl-text-tertiary);
+    opacity: 1;
+}
+
+@media (hover: hover) {
+    .header-nav .menu a:hover,
+    .header-nav .theme-toggle:hover {
+        color: var(--primary);
+    }
+}
+
+@media (max-width: 479px) {
+    .header-nav .menu {
+        column-gap: 12px;
+    }
+}
+
+@media print {
+    .theme-toggle {
+        display: none;
+    }
+}

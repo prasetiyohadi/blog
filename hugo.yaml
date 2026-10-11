@@ -70,7 +70,7 @@ params:
   comments: false  # posts opt in with `comments: true` in front matter (renders Disqus)
 
   label:
-    text: "Pras@GoPlatformID"
+    text: "pras-labs"
 
   assets:
     favicon: "/favicon.png"

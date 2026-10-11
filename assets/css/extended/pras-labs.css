@@ -110,6 +110,11 @@ input:focus-visible,
     outline-offset: 2px;
 }
 
+/* PaperMod paints list pages (home, archive, tags, search) with --code-bg in light mode. The page ground is bg. */
+.list {
+    background: var(--theme);
+}
+
 /* Wide content scrolls inside its own box */
 .md-content table,
 .md-content .highlight {

@@ -1,2 +1,16 @@
+{{- /*
+  Code block with the Pras' Labs CodeBlock anatomy.
+  - Always: the scrolling <pre> gets role="region" and an accessible name, so a keyboard user can find and scroll it.
+  - Optional header bar: add title="..." to the fence, e.g. ```bash {title="reconcile.sh"}.
+    Without a title there is no header, only the block.
+*/ -}}
 {{- $lang := .Type | default "text" -}}
-{{- transform.Highlight .Inner $lang .Options -}}
+{{- $title := .Attributes.title | default "" -}}
+{{- $label := cond (ne $title "") $title (printf "%s code" $lang) -}}
+{{- $html := transform.Highlight .Inner $lang .Options | string -}}
+{{- $html = replace $html `<pre tabindex="0"` (printf `<pre tabindex="0" role="region" aria-label="%s"` (htmlEscape $label)) 1 -}}
+{{- if ne $title "" -}}
+  {{- $header := printf `<div class="pl-code-header"><span class="pl-code-file">%s</span><span class="pl-code-lang">%s</span></div>` (htmlEscape $title) (htmlEscape $lang) -}}
+  {{- $html = replace $html `<div class="highlight">` (printf `<div class="highlight pl-has-header">%s` $header) 1 -}}
+{{- end -}}
+{{- $html | safeHTML -}}

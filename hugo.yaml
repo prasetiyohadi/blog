@@ -1,6 +1,6 @@
 baseURL: "https://blog.pras.my.id/"
 languageCode: "en-us"
-title: "~/pras-labs"
+title: "Pras' Labs"
 theme: PaperMod
 
 defaultContentLanguage: "en"
@@ -31,7 +31,7 @@ markup:
     lineNos: false
 
 # Main menu: Posts and About. Search is a field in the Nav (layouts/partials/header.html).
-# Archive and Tags are in the footer (params.footer.text below).
+# Archive, Tags and RSS are in the footer (layouts/partials/footer.html).
 menus:
   main:
     - identifier: posts
@@ -59,12 +59,12 @@ params:
   ShowRssButtonInSectionTermList: true
   comments: false  # posts opt in with `comments: true` in front matter (renders Disqus)
 
+  # The wordmark in the Nav. This is the only place ~/pras-labs appears; the site title above is plain text.
   label:
     text: "pras-labs"
 
-  # PaperMod prints this between the copyright and "Powered by".
-  footer:
-    text: "[Archive](/archives/) · [Tags](/tags/)"
+  # Used in the home page <title> only: "Pras' Labs: The Hands-On Engineer" (layouts/partials/head.html).
+  tagline: "The Hands-On Engineer"
 
   assets:
     favicon: "/favicon.png"

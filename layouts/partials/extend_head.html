@@ -2,7 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap">
-{{- /* Theme order: the reader's stored choice, then the OS setting, then dark. Runs before first paint and replaces PaperMod's light fallback. Storage is read inside try/catch so the page works without it. */ -}}
+{{- /* Theme order: the reader's stored choice, then the system setting (light or dark; dark only where the browser reports no color scheme at all). The script always sets data-theme, before first paint. Storage is read inside try/catch so the page works without it. Without JavaScript, the prefers-color-scheme rule in assets/css/extended/pras-labs.css decides. */ -}}
 <script>
     (function () {
         var t = null;
@@ -13,3 +13,5 @@
         document.documentElement.dataset.theme = t;
     })();
 </script>
+{{- /* Without JavaScript the theme button does nothing, so it is not shown. */ -}}
+<noscript><style>.pl-theme-toggle{display:none}</style></noscript>

@@ -1,7 +1,6 @@
 /*
  * Pras' Labs design system, step 4: Nav.
- * Source: the Nav component and "Theme switching" section of the design system,
- * plus a search field the design system does not define yet.
+ * Source: the Nav component, "Search" and "Theme switching" sections of the design system.
  * Markup is in layouts/partials/header.html. The wordmark is set in mono with the
  * ~/ prefix in the accent color. Links and the theme button are at least 44px
  * tall and wide. The bar is static, with a hairline rule below it.
@@ -14,7 +13,7 @@
 .header-nav {
     align-items: center;
     column-gap: 16px;
-    row-gap: 0;
+    row-gap: 4px;
     padding-top: 12px;
     padding-bottom: 12px;
     line-height: 1.35;
@@ -90,40 +89,57 @@
     border-bottom-color: var(--pl-accent);
 }
 
-/* Search field: the label is the 44px hit area, the input is 36px inside it */
+/*
+ * Search field. Narrow at rest (7rem, 44px tall), right after the wordmark. On focus it grows to the
+ * right, up to 26rem. From 460px up, where the Nav fits one row, the links and the theme
+ * button are hidden while the field has focus; the Nav keeps its height. Below that the links stay and
+ * the field only fills the rest of the wordmark's row, so the page does not shift under a tap.
+ * No animation. Without :has() the field stays narrow and the links stay.
+ */
 .header-nav .pl-search-form {
-    margin: 0;
+    flex: 0 0 auto;
+    margin: 0 auto 0 0;
 }
 
 .header-nav .pl-search {
-    display: flex;
-    align-items: center;
+    display: block;
     box-sizing: border-box;
+    width: 7rem;
     min-height: 44px;
-    padding: 4px 0;
-    cursor: text;
-}
-
-.header-nav .pl-search input {
-    box-sizing: border-box;
-    width: 9.5rem;
-    height: 36px;
-    padding: 0 10px;
+    padding: 0 12px;
     color: var(--primary);
     background: var(--entry);
     border: 1px solid var(--pl-border-control);
     border-radius: 4px;
     font-family: var(--pl-heading);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 400;
     line-height: 1.35;
     -webkit-appearance: none;
     appearance: none;
+    transition: border-color 150ms ease;
 }
 
-.header-nav .pl-search input::placeholder {
-    color: var(--pl-text-tertiary);
+.header-nav .pl-search::placeholder {
+    color: var(--secondary);
     opacity: 1;
+}
+
+/* Focus shows the shared ring (pras-labs.css) and an accent border, so focus never rests on the outline alone */
+.header-nav .pl-search:focus {
+    border-color: var(--pl-accent);
+}
+
+@supports selector(:has(a)) {
+    /* The basis stays 7rem so the line breaks do not change; only the free space on the wordmark's row is used */
+    .header-nav:has(.pl-search:focus) .pl-search-form {
+        flex: 1 1 7rem;
+        max-width: 26rem;
+    }
+
+    .header-nav:has(.pl-search:focus) .pl-search {
+        width: 100%;
+    }
 }
 
 @media (hover: hover) {
@@ -134,8 +150,32 @@
 }
 
 @media (max-width: 479px) {
+    .header-nav,
     .header-nav .menu {
         column-gap: 12px;
+    }
+}
+
+/*
+ * 460px is where this Nav fits one row (459px with "Theme: Light", 456px with "Theme: Dark", measured with the real fonts).
+ * The design system's 609px is for its three links; with two links here the number is lower. Re-measure if the menu changes.
+ */
+@media (min-width: 460px) {
+    @supports selector(:has(a)) {
+        /*
+         * Hidden by clipping, not display: none. A display: none link cannot take focus, so Tab from the field
+         * would skip Posts, About and the theme button. Clipped, the next Tab lands on Posts; the field loses
+         * focus, :has() stops matching and the links come back.
+         */
+        .header-nav:has(.pl-search:focus) .menu {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
     }
 }
 

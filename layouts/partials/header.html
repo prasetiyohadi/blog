@@ -1,7 +1,9 @@
 {{- /*
   Pras' Labs Nav: terminal wordmark, the site menu, a search field and one text button that switches the theme.
   Replaces PaperMod's header. No icons, no language switch (the site is single-language).
-  The search field submits to /search/?q=... (see assets/js/fastsearch.js).
+  Order in the DOM matches the screen: wordmark, search field, links, theme button.
+  The search field submits to /search/?q=... (see assets/js/fastsearch.js). It is narrow at rest and grows on
+  focus (pras-labs-nav.css); Escape leaves it.
   The theme button is the last item in the menu row, labeled with the current theme.
 */ -}}
 {{- $label := site.Params.label.text | default site.Title -}}
@@ -9,6 +11,9 @@
 <header class="header">
     <nav class="header-nav" aria-label="Main">
         <a class="pl-wordmark" href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label }} (Alt + H)"><span aria-hidden="true">~/</span>{{ $label }}</a>
+        <form class="pl-search-form" role="search" action="{{ "search/" | relLangURL }}" method="get">
+            <input class="pl-search" type="search" name="q" placeholder="Search" aria-label="Search the writing" title="Search the writing (Alt + /)" accesskey="/" autocomplete="off" maxlength="64">
+        </form>
         <ul id="menu" class="menu">
             {{- range site.Menus.main }}
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL)) | absLangURL }}
@@ -21,13 +26,6 @@
                 </a>
             </li>
             {{- end }}
-            <li>
-                <form class="pl-search-form" role="search" action="{{ "search/" | relLangURL }}" method="get">
-                    <label class="pl-search">
-                        <input type="search" name="q" placeholder="Search" aria-label="Search posts" title="Search posts (Alt + /)" accesskey="/" autocomplete="off" maxlength="64">
-                    </label>
-                </form>
-            </li>
             {{- if not site.Params.disableThemeToggle }}
             <li>
                 <button id="theme-toggle" class="theme-toggle" type="button" accesskey="t" title="(Alt + T)" hidden><span>Theme</span></button>
@@ -49,5 +47,11 @@
             </li>
             {{- end }}
         </ul>
+        <script>
+            (function () {
+                var f = document.querySelector('.pl-search');
+                if (f) f.addEventListener('keydown', function (e) { if (e.key === 'Escape') f.blur(); });
+            })();
+        </script>
     </nav>
 </header>

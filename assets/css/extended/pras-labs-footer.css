@@ -3,7 +3,7 @@
  * Source: components/core/core.css and the README section "Footer" of github.com/pras-labs/design.
  * Markup is in layouts/partials/footer.html. The links are .pl-nav-item (pras-labs-nav.css).
  * The footer sits inside the page padding like the Nav, with a hairline rule on top.
- * Never sticky or fixed.
+ * Never sticky or fixed. Bottom space is space-7 (48px), stepped down to space-6 (32px) below 748px.
  */
 
 .pl-footer {
@@ -34,4 +34,11 @@
     font-family: var(--pl-heading);
     font-size: 13px;
     line-height: 1.35;
+}
+
+/* Section rhythm: below bp-md (748px) space-7 steps down to space-6 (README, Responsive behavior) */
+@media (max-width: 747.98px) {
+    .pl-footer {
+        padding-bottom: 32px;
+    }
 }

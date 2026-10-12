@@ -1,10 +1,16 @@
-// Copy of PaperMod's assets/js/fastsearch.js with one addition, marked "Pras' Labs": it reads ?q= from the URL.
+// Copy of PaperMod's assets/js/fastsearch.js, changed to follow the Pras' Labs design system (Search section).
 // Hugo prefers a file in the site's assets/ over the theme's, so this replaces the theme copy.
+// Changes, each marked "Pras' Labs" below:
+//   1. The input is the Nav field. The results page has no search box of its own (layouts/search.html).
+//   2. The query comes from ?q= in the URL (the Nav form is a GET form), so a result page can be linked and
+//      reached with Back. Nothing searches while typing: Enter submits the form.
+//   3. Escape does not clear anything. The Nav field's own handler (layouts/partials/header.html) only blurs.
+//   4. The field is not focused on load, so the Nav links are not clipped when the page opens.
 import * as params from '@params';
 
 const resList = document.getElementById('searchResults');
-const sInput = document.getElementById('searchInput');
-const searchBox = document.getElementById('searchbox');
+// Pras' Labs: the Nav field is the only search field.
+const sInput = document.querySelector('.pl-nav .pl-field');
 
 let fuse;
 let currentElement = null;
@@ -35,14 +41,6 @@ const buildFuseOptions = () => {
         threshold: params.fuseOpts.threshold ?? defaultFuseOptions.threshold,
         distance: params.fuseOpts.distance ?? defaultFuseOptions.distance,
         ignoreLocation: params.fuseOpts.ignorelocation ?? defaultFuseOptions.ignoreLocation
-    };
-};
-
-const debounce = (fn, delay) => {
-    let timeout;
-    return (...args) => {
-        clearTimeout(timeout);
-        timeout = window.setTimeout(() => fn(...args), delay);
     };
 };
 
@@ -130,9 +128,6 @@ const initSearch = async () => {
         return;
     }
 
-    sInput.disabled = false;
-    sInput.focus();
-
     try {
         const response = await fetch('../index.json');
         if (!response.ok) {
@@ -157,8 +152,6 @@ const initSearch = async () => {
 
 window.addEventListener('load', initSearch);
 
-sInput?.addEventListener('input', debounce(performSearch, 150));
-
 sInput?.addEventListener('search', () => {
     if (!sInput.value) {
         reset();
@@ -168,12 +161,8 @@ sInput?.addEventListener('search', () => {
 document.addEventListener('keydown', (event) => {
     const { key } = event;
     const active = document.activeElement;
-    const isInSearchBox = searchBox?.contains(active);
-
-    if (key === 'Escape') {
-        reset();
-        return;
-    }
+    // Pras' Labs: the field or a result. Escape is not handled here.
+    const isInSearchBox = active === sInput || resList.contains(active);
 
     if (!firstResult || !isInSearchBox) {
         return;

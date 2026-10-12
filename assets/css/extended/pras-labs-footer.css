@@ -1,28 +1,37 @@
 /*
- * Pras' Labs design system, footer links.
- * The design system has no Footer component yet. This keeps PaperMod's footer
- * and gives its links the same 44px hit area as the Nav. Archive and Tags
- * live here (params.footer.text in hugo.yaml) instead of in the Nav.
+ * Pras' Labs design system: Footer.
+ * Source: components/core/core.css and the README section "Footer" of github.com/pras-labs/design.
+ * Markup is in layouts/partials/footer.html. The links are .pl-nav-item (pras-labs-nav.css).
+ * The footer sits inside the page padding like the Nav, with a hairline rule on top.
+ * Never sticky or fixed.
  */
 
-.footer {
+.pl-footer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    column-gap: 4px;
-    font-size: 13px;
+    justify-content: space-between;
+    gap: 4px 16px;
+    box-sizing: border-box;
+    /* Inside the page padding, like the Nav; the hairline rule spans the content column */
+    width: calc(100% - var(--gap) * 2);
+    max-width: var(--main-width);
+    margin: 0 auto;
+    padding: 16px 0 48px;
+    border-top: 1px solid var(--border);
+    text-align: start;
 }
 
-.footer a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-    padding: 0 4px;
+.pl-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 16px;
 }
 
-.footer p {
+.pl-footer-copy {
     margin: 0;
+    color: var(--pl-text-tertiary);
+    font-family: var(--pl-heading);
+    font-size: 13px;
+    line-height: 1.35;
 }

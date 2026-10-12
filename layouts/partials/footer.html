@@ -3,6 +3,8 @@
   Pras' Labs Footer: secondary links and one copyright line. Replaces PaperMod's footer block.
   One <footer> (the page's only contentinfo) with a <nav aria-label="Footer"> and the copyright line.
   The links are the same 44px text items as the Nav (.pl-nav-item). A page the site does not have is left out.
+  "Back to top" is a static link at the end of the link row (README, Footer: the in-system way to get back up).
+  It replaces PaperMod's floating button, which is outside the system. The target is <body id="top">.
   The copyright holder is the author, not the site name. PaperMod's "Powered by" line is not printed.
   baseof.html caches this partial by Layout and Kind, so aria-current is only right for pages whose
   Layout/Kind pair is their own (the archive and tags pages are).
@@ -18,19 +20,10 @@
         {{- with site.Home.OutputFormats.Get "rss" }}
         <a class="pl-nav-item" href="{{ .RelPermalink }}"><span>RSS</span></a>
         {{- end }}
+        <a class="pl-nav-item" href="#top"><span>Back to top</span></a>
     </nav>
     <p class="pl-footer-copy">&copy; {{ now.Year }} {{ site.Params.author }}</p>
 </footer>
-{{- end }}
-
-{{- if (not site.Params.disableScrollToTop) }}
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
 {{- end }}
 
 {{- partial "extend_footer.html" . }}
@@ -48,6 +41,13 @@
                 document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
             }
             if (id === "top") {
+                // A native jump to #top also moves the keyboard starting point there, so Tab continues from
+                // the top of the page. scrollIntoView does not, so do it here (no focus ring: blur at once).
+                var top = document.getElementById("top");
+                top.setAttribute("tabindex", "-1");
+                top.focus({ preventScroll: true });
+                top.blur();
+                top.removeAttribute("tabindex");
                 history.replaceState(null, null, " ");
             } else {
                 history.pushState(null, null, `#${id}`);
@@ -56,21 +56,6 @@
     });
 
 </script>
-
-{{- if (not site.Params.disableScrollToTop) }}
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-{{- end }}
 
 {{- /* Pras' Labs: PaperMod's theme toggle script was removed here. layouts/partials/header.html handles the button, with storage in try/catch. */}}
 

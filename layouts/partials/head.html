@@ -102,11 +102,10 @@
 <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
 {{ end -}}
 
-{{- /* Pras' Labs: without JavaScript the theme button and the top link do nothing, so they are hidden. PaperMod's dark palette for this case was removed; assets/css/extended/pras-labs.css has a prefers-color-scheme rule with the design system tokens instead. */}}
+{{- /* Pras' Labs: without JavaScript the theme button does nothing, so it is hidden. PaperMod's dark palette for this case was removed; assets/css/extended/pras-labs.css has a prefers-color-scheme rule with the design system tokens instead. */}}
 <noscript>
     <style>
-        #theme-toggle,
-        .top-link {
+        #theme-toggle {
             display: none;
         }
 

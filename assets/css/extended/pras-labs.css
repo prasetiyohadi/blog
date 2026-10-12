@@ -5,10 +5,22 @@
  * links and focus. Code blocks are in pras-labs-code.css; the Nav, hero and
  * post list come in later steps.
  *
- * PaperMod picks the theme with :root[data-theme="dark"]; light is the default.
+ * Theme contract (README, "Theme switching" of github.com/pras-labs/design): the head script
+ * (extend_head.html) always sets data-theme on <html>, from the stored choice and otherwise from
+ * matchMedia. The prefers-color-scheme block below is for no JavaScript: PaperMod prints
+ * data-theme="auto" then, so the styles follow the system. Print always uses the light tokens.
  */
 
 :root {
+    /* Page padding, 24px from 480px (space-5). PaperMod's zmedia.css sets 14px below 768px; the
+       Nav, main and footer all take their side padding from --gap. */
+    --gap: 24px;
+    /* Nav and Footer share one width: content-width-wide (1040px), centered, with the 700px reading column
+       (--main-width) centered inside. PaperMod's own value is 1024px. Page padding is added on top by
+       PaperMod (.header-nav) and by .pl-footer, so below 1088px both fill the page less the padding. */
+    --nav-width: 1040px;
+    color-scheme: light;
+
     /* PaperMod variables, light */
     --theme: #fbf9f4;           /* bg */
     --entry: #ffffff;           /* surface */
@@ -21,6 +33,7 @@
 
     /* Design system tokens, light */
     --pl-text-tertiary: #6f6757;
+    --pl-border-control: #1b18148c;   /* boundary of a control, 3:1 or better */
     --pl-accent: #0b6f63;
     --pl-accent-strong: #084f47;
     --pl-focus-ring: #0b6f63;
@@ -32,6 +45,7 @@
 }
 
 :root[data-theme="dark"] {
+    color-scheme: dark;
     --theme: #15130f;
     --entry: #201c17;
     --primary: #eee7da;
@@ -41,9 +55,58 @@
     --border: #ede6d91a;
 
     --pl-text-tertiary: #8d8474;
+    --pl-border-control: #ede6d966;
     --pl-accent: #35d0c0;
     --pl-accent-strong: #57e0d2;
     --pl-focus-ring: #35d0c0;
+}
+
+/* No JavaScript: data-theme stays "auto" (or absent), so follow the system setting. Same values as the dark block above. */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --theme: #15130f;
+        --entry: #201c17;
+        --primary: #eee7da;
+        --secondary: #a79e8e;
+        --tertiary: #403d37;
+        --content: #eee7da;
+        --border: #ede6d91a;
+
+        --pl-text-tertiary: #8d8474;
+        --pl-border-control: #ede6d966;
+        --pl-accent: #35d0c0;
+        --pl-accent-strong: #57e0d2;
+        --pl-focus-ring: #35d0c0;
+        color-scheme: dark;
+    }
+}
+
+/* Print always uses the light tokens, whatever the screen theme */
+@media print {
+    :root,
+    :root[data-theme="dark"],
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --theme: #fbf9f4;
+        --entry: #ffffff;
+        --primary: #1c1a15;
+        --secondary: #625b4c;
+        --tertiary: #cecbc7;
+        --content: #1c1a15;
+        --border: #1b181414;
+        --pl-text-tertiary: #6f6757;
+        --pl-border-control: #1b18148c;
+        --pl-accent: #0b6f63;
+        --pl-accent-strong: #084f47;
+        --pl-focus-ring: #0b6f63;
+        color-scheme: light;
+    }
+}
+
+/* Page padding below 480px: space-4 (16px). Above it --gap is 24px, space-5. */
+@media (max-width: 479.98px) {
+    :root {
+        --gap: 16px;
+    }
 }
 
 /* Families: heading family for headings and UI, serif for article prose only, mono for code and tags */
@@ -108,6 +171,11 @@ input:focus-visible,
 [tabindex]:focus-visible {
     outline: 2px solid var(--pl-focus-ring);
     outline-offset: 2px;
+}
+
+/* PaperMod paints list pages (home, archive, tags, search) with --code-bg in light mode. The page ground is bg. */
+.list {
+    background: var(--theme);
 }
 
 /* Wide content scrolls inside its own box */

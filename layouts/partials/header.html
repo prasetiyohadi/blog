@@ -1,0 +1,59 @@
+{{- /*
+  Pras' Labs Nav: terminal wordmark, a search field, the site's links and one text button that switches the theme.
+  Replaces PaperMod's header. No icons, no language switch (the site is single-language).
+  Order in the DOM matches the screen: wordmark, search field, links, theme button.
+  The links are the site's main menu (hugo.yaml). Secondary lists (Archive, Tags, RSS) are in the footer.
+  The search field is the only search field on a page, the results page included. It submits to
+  /search/?q=... and assets/js/fastsearch.js is wired to it. It is narrow at rest and grows on focus
+  (assets/css/extended/pras-labs-nav.css). Escape leaves the field and changes nothing else.
+  The theme button is the last item in the link group, labeled with the current theme.
+*/ -}}
+{{- $label := site.Params.label.text | default site.Title -}}
+{{- $currentPage := . -}}
+<header class="header">
+    <nav class="header-nav pl-nav" aria-label="Main">
+        <a class="pl-wordmark" href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label }} (Alt + H)"><span aria-hidden="true">~/</span>{{ $label }}</a>
+        <form class="pl-search" role="search" action="{{ "search/" | relLangURL }}" method="get">
+            <input class="pl-field" type="search" name="q" placeholder="Search" aria-label="Search the writing" title="Search the writing (Alt + /)" accesskey="/" autocomplete="off" enterkeyhint="search" maxlength="64">
+        </form>
+        <div class="pl-nav-links">
+            {{- range site.Menus.main }}
+            {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL)) | absLangURL }}
+            {{- $page_url := $currentPage.Permalink | absLangURL }}
+            {{- $is_current := eq $menu_item_url $page_url }}
+            <a class="pl-nav-item" href="{{ .URL | absLangURL }}"
+                {{- if $is_current }} aria-current="page"{{ end }}><span>{{ .Pre }}{{ .Name }}{{ .Post }}</span></a>
+            {{- end }}
+            {{- if not site.Params.disableThemeToggle }}
+            <button id="theme-toggle" class="pl-nav-item pl-theme-toggle" type="button" accesskey="t" title="(Alt + T)"><span>Theme</span></button>
+            {{- end }}
+        </div>
+        <script>
+            (function () {
+                var field = document.querySelector('.pl-nav .pl-field');
+                if (field) {
+                    // Escape leaves the field and does nothing else: the text stays (preventDefault stops the
+                    // browser clearing a type=search field), results on the page stay, the links come back.
+                    field.addEventListener('keydown', function (e) {
+                        if (e.key === 'Escape') { e.preventDefault(); field.blur(); }
+                    });
+                }
+                var b = document.getElementById('theme-toggle');
+                if (!b) return;
+                var root = document.documentElement;
+                function update() {
+                    var dark = root.dataset.theme === 'dark';
+                    b.firstElementChild.textContent = dark ? 'Theme: Dark' : 'Theme: Light';
+                    b.setAttribute('aria-label', dark ? 'Theme: Dark. Switch to light.' : 'Theme: Light. Switch to dark.');
+                }
+                b.addEventListener('click', function () {
+                    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+                    root.dataset.theme = next;
+                    try { localStorage.setItem('pref-theme', next); } catch (e) { /* storage unavailable: the choice lasts for this page only */ }
+                });
+                update();
+                new MutationObserver(update).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+            })();
+        </script>
+    </nav>
+</header>

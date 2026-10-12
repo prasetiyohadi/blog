@@ -1,6 +1,6 @@
 baseURL: "https://blog.pras.my.id/"
 languageCode: "en-us"
-title: "Pras@GoPlatformID"
+title: "Pras' Labs"
 theme: PaperMod
 
 defaultContentLanguage: "en"
@@ -30,28 +30,18 @@ markup:
     noClasses: false
     lineNos: false
 
+# Main menu: Posts and About. Search is a field in the Nav (layouts/partials/header.html).
+# Archive, Tags and RSS are in the footer (layouts/partials/footer.html).
 menus:
   main:
     - identifier: posts
       name: Posts
       url: /blogs/
       weight: 10
-    - identifier: archives
-      name: Archive
-      url: /archives/
-      weight: 20
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 30
-    - identifier: search
-      name: Search
-      url: /search/
-      weight: 40
     - identifier: about
       name: About
       url: /about/
-      weight: 50
+      weight: 20
 
 params:
   env: production
@@ -69,8 +59,12 @@ params:
   ShowRssButtonInSectionTermList: true
   comments: false  # posts opt in with `comments: true` in front matter (renders Disqus)
 
+  # The wordmark in the Nav. This is the only place ~/pras-labs appears; the site title above is plain text.
   label:
-    text: "Pras@GoPlatformID"
+    text: "pras-labs"
+
+  # Used in the home page <title> only: "Pras' Labs: The Hands-On Engineer" (layouts/partials/head.html).
+  tagline: "The Hands-On Engineer"
 
   assets:
     favicon: "/favicon.png"

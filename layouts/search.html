@@ -1,0 +1,26 @@
+{{- /*
+  Pras' Labs search results page. PaperMod's version has its own search box. The design system allows one
+  search field per page, the one in the Nav, so this page has only the results list. assets/js/fastsearch.js
+  reads ?q= from the URL, puts it in the Nav field and fills #searchResults.
+*/ -}}
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+        {{- partial "translation_list.html" . -}}
+    </div>
+    {{- end }}
+</header>
+
+<div id="searchbox" class="searchbox">
+    <ul id="searchResults" class="searchResults" aria-label="search results"></ul>
+</div>
+
+{{- end }}{{/* end main */}}

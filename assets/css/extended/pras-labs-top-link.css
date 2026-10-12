@@ -1,0 +1,51 @@
+/*
+ * Back-to-top button. DEVIATION from the Pras' Labs design system: a floating button is outside the system
+ * (README, Visual foundations, Transparency): it covers text and can hide a focused element. The in-system
+ * version is a static "Back to top" link at the end of the article or in the Footer. This site keeps
+ * PaperMod's floating button (layouts/partials/footer.html) and applies the system's minimums for a site
+ * that keeps one:
+ *   44px target, solid surface fill with a border-control boundary, no shadow, shown only after scrolling
+ *   (PaperMod's script, after one viewport height), hidden under print, instant jump (smooth only without
+ *   prefers-reduced-motion, in footer.html), the shared focus ring (pras-labs.css), space-4 (16px) from the
+ *   edges, and never over the Footer links (the links sit at the start of the row, the button at the end).
+ * Remove the button with `disableScrollToTop: true` in hugo.yaml.
+ */
+
+.top-link {
+    right: 16px;
+    bottom: 16px;
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    padding: 11px;
+    color: var(--primary);
+    background: var(--entry);
+    border: 1px solid var(--pl-border-control);
+    border-radius: 4px;
+    filter: none;
+    /* Color only, like every other control. PaperMod fades opacity and visibility; the button now appears at once. */
+    transition: color 150ms ease;
+}
+
+.top-link svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    filter: none;
+}
+
+.top-link:active {
+    color: var(--pl-accent-strong);
+}
+
+@media (hover: hover) {
+    .top-link:hover {
+        color: var(--pl-accent-strong);
+    }
+}
+
+@media print {
+    .top-link {
+        display: none;
+    }
+}

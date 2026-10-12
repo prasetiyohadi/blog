@@ -50,6 +50,54 @@
     --code-bg: var(--pl-code-bg-inline);
 }
 
+/* No JavaScript: follow the system setting, same values as the dark block above */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --pl-code-bg: #0e0c09;
+        --pl-code-bg-inline: #28221a;
+        --pl-code-border: #3b342999;
+        --pl-code-fg: #d7d3c9;
+        --pl-code-keyword: #d5908a;
+        --pl-code-string: #aebc86;
+        --pl-code-function: #80b3cc;
+        --pl-code-comment: #8d8474;
+        --pl-code-number: #e3be80;
+        --pl-code-punct: #a79e8e;
+        --pl-danger: #e0806b;
+        --pl-success: #8fbf7f;
+        --pl-code-hl: #ede6d90f;
+
+        /* PaperMod sets these on :root[data-theme="dark"] too, so repeat them at the same specificity */
+        --code-block-bg: var(--pl-code-bg);
+        --code-bg: var(--pl-code-bg-inline);
+    }
+}
+
+/* Print always uses the light code tokens */
+@media print {
+    :root,
+    :root[data-theme="dark"],
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --pl-code-bg: #f4f1ec;
+        --pl-code-bg-inline: #ece7dc;
+        --pl-code-border: #1b181422;
+        --pl-code-fg: #2a281f;
+        --pl-code-keyword: #9c433f;
+        --pl-code-string: #546221;
+        --pl-code-function: #056180;
+        --pl-code-comment: #6f6757;
+        --pl-code-number: #745519;
+        --pl-code-punct: #625b4c;
+        --pl-danger: #a23f2a;
+        --pl-success: #3f7a34;
+        --pl-code-hl: #1b18140d;
+
+        /* PaperMod reads this for both the block and its inner <code> */
+        --code-block-bg: var(--pl-code-bg);
+        --code-bg: var(--pl-code-bg-inline);
+    }
+}
+
 /* Inline code: one color, warm background, same size as block code */
 .post-content code {
     font-size: 0.82em;

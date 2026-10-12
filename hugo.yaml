@@ -1,6 +1,6 @@
 baseURL: "https://blog.pras.my.id/"
 languageCode: "en-us"
-title: "Pras@GoPlatformID"
+title: "~/pras-labs"
 theme: PaperMod
 
 defaultContentLanguage: "en"

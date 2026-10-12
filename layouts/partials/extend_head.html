@@ -15,3 +15,7 @@
 </script>
 {{- /* Without JavaScript the theme button does nothing, so it is not shown. */ -}}
 <noscript><style>.pl-theme-toggle{display:none}</style></noscript>
+{{- /* Structured data, home page only: the long form is the WebSite alternateName; the name stays the plain "Pras' Labs". PaperMod's own Organization block (templates/schema_json.html) is unchanged. */ -}}
+{{- if and .IsHome site.Params.tagline }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "WebSite" "name" site.Title "alternateName" (printf "%s: %s" site.Title site.Params.tagline) "url" site.Home.Permalink | jsonify | safeJS }}</script>
+{{- end }}

@@ -37,6 +37,30 @@
     color: var(--pl-accent);
 }
 
+/*
+ * PaperMod's `.header-nav a { display: block }` has specificity 0,1,1 and out-ranks a single class, so the
+ * wordmark and the nav items would be blocks (text at the top of the 44px box). A class plus the element
+ * (0,2,1) wins. It is limited to links on purpose: the theme button must stay hideable by a single class
+ * (.pl-theme-toggle, in the print rule below and in the <noscript> rule in extend_head.html).
+ * It is the same trap as the design system's global link rule, which is wrapped in :where(). This site has
+ * no plain a:hover rule of its own.
+ */
+.pl-nav a.pl-wordmark,
+.pl-nav a.pl-nav-item {
+    display: inline-flex;
+}
+
+/* Hover and press shift to accent-strong. Hover only where the device can hover, so a tap leaves nothing behind. */
+.pl-wordmark:active {
+    color: var(--pl-accent-strong);
+}
+
+@media (hover: hover) {
+    .pl-wordmark:hover {
+        color: var(--pl-accent-strong);
+    }
+}
+
 /* The link group wraps instead of scrolling, so a long label or a bigger font never pushes it off the page */
 .pl-nav-links {
     display: flex;
@@ -70,24 +94,26 @@
     border-bottom: 2px solid transparent;
 }
 
-/* Press shows the same color as hover; hover itself only where the device can hover, so a tap leaves nothing behind */
-.pl-nav-item:active {
-    color: var(--pl-accent-strong);
-}
-
-@media (hover: hover) {
-    .pl-nav-item:hover {
-        color: var(--pl-accent-strong);
-    }
-}
-
-/* Current page: primary text and a 2px accent rule. After the hover and press rules, so it keeps its color. */
+/*
+ * Hover and press shift the color to accent-strong, the same shift for both. Hover only under (hover: hover).
+ * The current item keeps text-primary on hover and press and shows its state with the accent underline.
+ */
 .pl-nav-item[aria-current="page"] {
     color: var(--primary);
 }
 
 .pl-nav-item[aria-current="page"] > span {
     border-bottom-color: var(--pl-accent);
+}
+
+.pl-nav-item:not([aria-current="page"]):active {
+    color: var(--pl-accent-strong);
+}
+
+@media (hover: hover) {
+    .pl-nav-item:not([aria-current="page"]):hover {
+        color: var(--pl-accent-strong);
+    }
 }
 
 @media (max-width: 479.98px) {
@@ -149,14 +175,19 @@
     }
 
     /*
-     * ONE-ROW WIDTH, in one place. From the width at which this site's Nav fits on one row, the link group
-     * is hidden while the field has focus. Measured with the real fonts, the longer "Theme: Light" label,
-     * two links (Posts, About) and the real page padding: one row from 490px up (487px with "Theme: Dark").
-     * Below 480px the page padding drops from 24px to 16px, so the Nav also fits one row from 466px to
-     * 479px; the rule does not apply there (too high is harmless), so it is one width, not two ranges.
-     * Set to 500px: the measured 490px plus headroom for font rendering that differs between platforms.
-     * This is not the design system's 609px, which is for its own three links. Too low shifts the page
-     * when the field takes focus; too high only keeps the links visible a little longer.
+     * ONE-ROW WIDTH, in one place. The rule (design system README, Search): the smallest width W such that
+     * every width from W up fits on one row, found by scanning from wide to narrow and stopping at the first
+     * width that needs two rows, then rounded up by about 8px for font rendering differences between
+     * platforms. From W up the link group is hidden while the field has focus.
+     *
+     * Measured with the real fonts, the longer "Theme: Light" label, two links (Posts, About) and the real
+     * page padding: two rows at 490px, one row from 491px up. W is 491px ("Theme: Dark" gives 488px), so
+     * the value is 500px. Page padding steps from 24px to 16px at 480px, so the Nav is also one row from
+     * 466px to 479px and two rows from 480px to 490px: the first width that fits when scanning down from
+     * 479px would be wrong. The rule does not apply below 500px, which is the safe side.
+     *
+     * This is not the design system's 609px (616px in its core.css), which is for its own three links. Too
+     * low shifts the page when the field takes focus; too high only keeps the links visible a little longer.
      * Re-measure if the menu, the labels, the fonts or the page padding change.
      *
      * Hidden by clipping, never display: none or visibility: hidden. Those remove the links from the tab

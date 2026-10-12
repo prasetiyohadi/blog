@@ -15,6 +15,10 @@
     /* Page padding, 24px from 480px (space-5). PaperMod's zmedia.css sets 14px below 768px; the
        Nav, main and footer all take their side padding from --gap. */
     --gap: 24px;
+    /* Nav and Footer share one width: content-width-wide (1040px), centered, with the 700px reading column
+       (--main-width) centered inside. PaperMod's own value is 1024px. Page padding is added on top by
+       PaperMod (.header-nav) and by .pl-footer, so below 1088px both fill the page less the padding. */
+    --nav-width: 1040px;
     color-scheme: light;
 
     /* PaperMod variables, light */

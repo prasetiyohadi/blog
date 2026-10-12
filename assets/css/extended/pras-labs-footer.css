@@ -2,7 +2,7 @@
  * Pras' Labs design system: Footer.
  * Source: components/core/core.css and the README section "Footer" of github.com/pras-labs/design.
  * Markup is in layouts/partials/footer.html. The links are .pl-nav-item (pras-labs-nav.css).
- * The footer sits inside the page padding like the Nav, with a hairline rule on top.
+ * The footer is as wide as the Nav and sits inside the page padding, with a hairline rule on top.
  * Never sticky or fixed. Bottom space is space-7 (48px), stepped down to space-6 (32px) below 748px.
  */
 
@@ -13,9 +13,10 @@
     justify-content: space-between;
     gap: 4px 16px;
     box-sizing: border-box;
-    /* Inside the page padding, like the Nav; the hairline rule spans the content column */
+    /* Same width as the Nav (--nav-width, 1040px), inside the page padding, centered. The 700px reading
+       column sits centered inside it. The hairline rule spans the full width. */
     width: calc(100% - var(--gap) * 2);
-    max-width: var(--main-width);
+    max-width: var(--nav-width);
     margin: 0 auto;
     padding: 16px 0 48px;
     border-top: 1px solid var(--border);

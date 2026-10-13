@@ -6,6 +6,8 @@
 //      reached with Back. Nothing searches while typing: Enter submits the form.
 //   3. Escape does not clear anything. The Nav field's own handler (layouts/partials/header.html) only blurs.
 //   4. The field is not focused on load, so the Nav links are not clipped when the page opens.
+//   5. Results are PostCard rows (title, excerpt, date, read time, tags) instead of PaperMod's title-only list.
+//      The extra fields come from layouts/index.json.
 import * as params from '@params';
 
 const resList = document.getElementById('searchResults');
@@ -61,7 +63,7 @@ const setActiveResult = (element) => {
     }
 
     element.focus();
-    element.parentElement?.classList.add('focus');
+    element.closest('li')?.classList.add('focus');
     currentElement = element;
 };
 
@@ -75,29 +77,50 @@ const renderResults = (results) => {
     const fragment = document.createDocumentFragment();
 
     for (const result of results) {
+        // Pras' Labs: a PostCard row, the same markup as layouts/partials/pl-post-row.html. The whole row is one
+        // link (the title link covers the row in CSS). Text is set with textContent, never as HTML.
+        const item = result.item;
         const li = document.createElement('li');
-        const titleText = document.createTextNode(result.item.title);
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('width', '24');
-        svg.setAttribute('height', '24');
-        svg.setAttribute('viewBox', '0 0 24 24');
-        svg.setAttribute('fill', 'none');
-        svg.setAttribute('stroke', 'currentColor');
-        svg.setAttribute('stroke-width', '2');
-        svg.setAttribute('stroke-linecap', 'round');
-        svg.setAttribute('stroke-linejoin', 'round');
-        svg.classList.add('feather', 'feather-chevrons-right');
+        const article = document.createElement('article');
+        article.className = 'pl-post';
 
-        svg.innerHTML = '<polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline>';
-
+        const h2 = document.createElement('h2');
+        h2.className = 'pl-post-title';
         const link = document.createElement('a');
-        link.className = 'entry-link';
-        link.href = result.item.permalink;
-        link.setAttribute('aria-label', result.item.title);
+        link.className = 'pl-post-link';
+        link.href = item.permalink;
+        link.textContent = item.title;
+        h2.appendChild(link);
+        article.appendChild(h2);
 
-        li.appendChild(titleText);
-        li.appendChild(svg);
-        li.appendChild(link);
+        if (item.excerpt) {
+            const p = document.createElement('p');
+            p.className = 'pl-post-excerpt';
+            p.textContent = item.excerpt;
+            article.appendChild(p);
+        }
+
+        const dateText = [item.date, item.readtime].filter(Boolean).join(' · ');
+        const tags = Array.isArray(item.tags) ? item.tags : [];
+        if (dateText || tags.length) {
+            const meta = document.createElement('div');
+            meta.className = 'pl-post-meta';
+            if (dateText) {
+                const d = document.createElement('span');
+                d.className = 'pl-post-date';
+                d.textContent = dateText;
+                meta.appendChild(d);
+            }
+            for (const tag of tags) {
+                const t = document.createElement('span');
+                t.className = 'pl-post-tag';
+                t.textContent = '#' + tag;
+                meta.appendChild(t);
+            }
+            article.appendChild(meta);
+        }
+
+        li.appendChild(article);
         fragment.appendChild(li);
     }
 
@@ -172,20 +195,20 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
 
         if (active === sInput) {
-            setActiveResult(firstResult.querySelector('.entry-link'));
-        } else if (active?.parentElement !== lastResult) {
-            setActiveResult(active?.parentElement?.nextElementSibling?.querySelector('.entry-link'));
+            setActiveResult(firstResult.querySelector('.pl-post-link'));
+        } else if (active?.closest('li') !== lastResult) {
+            setActiveResult(active?.closest('li')?.nextElementSibling?.querySelector('.pl-post-link'));
         }
     } else if (key === 'ArrowUp') {
         event.preventDefault();
 
-        if (active?.parentElement === firstResult) {
+        if (active?.closest('li') === firstResult) {
             setActiveResult(sInput);
         } else if (active !== sInput) {
-            setActiveResult(active?.parentElement?.previousElementSibling?.querySelector('.entry-link'));
+            setActiveResult(active?.closest('li')?.previousElementSibling?.querySelector('.pl-post-link'));
         }
     } else if (key === 'ArrowRight') {
-        if (active?.matches?.('.entry-link')) {
+        if (active?.matches?.('.pl-post-link')) {
             active.click();
         }
     }

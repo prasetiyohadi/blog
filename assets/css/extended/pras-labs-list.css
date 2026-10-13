@@ -1,0 +1,250 @@
+/*
+ * Post list, tags and pagination, from the Pras' Labs design system (github.com/pras-labs/design):
+ * components/core/PostCard, Tag and Button.
+ *
+ * Rows (home, Posts, tag pages, archive, search results): no card border, fill or shadow, no thumbnail, a hairline
+ * under each row. The whole row is one link: the title is the link and its ::after covers the row, so the link has
+ * a real name and the row is still one target. Nothing moves or shrinks on press.
+ * Press cue (design system): the title turns accent-strong, with no transition on the way in; the 120ms fade runs
+ * only on release. Hover is the same, only where the device can hover.
+ * Markup: layouts/partials/pl-post-row.html (and assets/js/fastsearch.js for search results).
+ */
+
+/* ---- Row ---- */
+
+.pl-post {
+    position: relative;
+    padding: 32px 0;                         /* space-6 */
+    border-bottom: 1px solid var(--border);  /* border-hairline */
+}
+
+.pl-post-title {
+    margin: 0 0 8px;
+    font-family: var(--pl-heading);
+    font-size: clamp(1.375rem, 1vw + 1.125rem, 1.75rem);  /* text-h3, 22px to 28px */
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+}
+
+.pl-post-link {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--pl-duration-fast) var(--pl-ease);
+}
+
+/* The link covers the whole row, so a tap anywhere in it opens the post. */
+.pl-post-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+/* Press: no transition on the way in. The underline is the second cue: accent-strong against text-primary
+   differs by less than 2:1 in luminance, so the color alone is not enough (the design system's own rule for
+   text controls). */
+.pl-post-link:active {
+    color: var(--pl-accent-strong);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
+    transition: none;
+}
+
+@media (hover: hover) {
+    .pl-post-link:hover {
+        color: var(--pl-accent-strong);
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.15em;
+    }
+}
+
+/* Keyboard focus: the ring goes around the row, which is what the link covers. Without :has the browser's
+   own ring on the title stays (the global a:focus-visible rule). */
+@supports selector(:has(*)) {
+    .pl-post-link:focus-visible {
+        outline: none;
+    }
+
+    .pl-post:has(.pl-post-link:focus-visible) {
+        outline: 2px solid var(--pl-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+/* Excerpt: serif body, 17px, 62ch. Three lines at most (an automatic summary is about 70 words). */
+.pl-post-excerpt {
+    max-width: 62ch;
+    margin: 0 0 14px;
+    font-family: var(--pl-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--secondary);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+/* Meta: DATE · READ TIME, then the hashtags as static labels */
+.pl-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+}
+
+.pl-post-date {
+    font-family: var(--pl-heading);
+    font-size: 0.8125rem;                 /* text-xs, 13px */
+    letter-spacing: 0.04em;               /* tracking-wide */
+    text-transform: uppercase;
+    color: var(--pl-text-tertiary);
+}
+
+.pl-post-tag {
+    font-family: var(--pl-mono);
+    font-size: 0.8125rem;
+    color: var(--secondary);
+    overflow-wrap: anywhere;
+}
+
+/* Archive: the year and month headings group the rows; the month's own hairline closes the group. */
+.archive-posts .pl-post:last-child {
+    border-bottom: 0;
+}
+
+/* Search results: a plain list of rows */
+.searchResults,
+.searchResults li {
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    display: block;
+    list-style: none;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    transition: none;
+}
+
+.searchResults li:hover,
+.searchResults li:focus-within {
+    transform: none;
+}
+
+/* ---- Tag chips: the tags index and the tags at the end of a post ---- */
+
+.pl-tags,
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;                            /* space-3, so 44px hit areas of neighbours meet but do not overlap */
+    margin: var(--content-gap, 1rem) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.terms-tags li,
+.post-tags li {
+    display: block;
+    font-weight: inherit;
+}
+
+.terms-tags a.pl-tag,
+.post-tags a {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 32px;
+    padding: 0 12px;
+    border: 1px solid var(--pl-border-control);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--secondary);
+    font-family: var(--pl-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: lowercase;            /* Hugo capitalizes term titles; tags are written lowercase */
+    transition: color var(--pl-duration-fast) var(--pl-ease), border-color var(--pl-duration-fast) var(--pl-ease);
+}
+
+/* 44px hit area around the 32px chip; the 12px gap keeps neighbours from overlapping. */
+.terms-tags a.pl-tag::after,
+.post-tags a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+}
+
+.pl-tag-count {
+    color: var(--pl-text-tertiary);
+}
+
+.terms-tags a.pl-tag:active,
+.post-tags a:active {
+    color: var(--pl-accent-strong);
+    border-color: var(--pl-accent-border);
+    background: transparent;
+    transition: none;
+}
+
+@media (hover: hover) {
+    .terms-tags a.pl-tag:hover,
+    .post-tags a:hover {
+        color: var(--pl-accent-strong);
+        border-color: var(--pl-accent-border);
+        background: transparent;
+    }
+}
+
+/* ---- Pagination: Button, secondary, 44px, no arrow glyphs ---- */
+
+.page-footer {
+    margin-block: 32px 0;
+}
+
+.pagination {
+    gap: 12px;
+}
+
+.pagination a {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid var(--pl-border-control);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--primary);
+    font-family: var(--pl-heading);
+    font-size: 0.875rem;                  /* text-sm */
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition: color var(--pl-duration-fast) var(--pl-ease), border-color var(--pl-duration-fast) var(--pl-ease);
+}
+
+.pagination a:active {
+    color: var(--pl-accent-strong);
+    border-color: var(--pl-accent);
+    transition: none;
+}
+
+@media (hover: hover) {
+    .pagination a:hover {
+        color: var(--pl-accent-strong);
+        border-color: var(--pl-accent);
+    }
+}

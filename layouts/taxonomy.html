@@ -1,0 +1,31 @@
+{{- /*
+  Copy of PaperMod's layouts/taxonomy.html. Change: the terms are Tag chips (components/core/Tag): the count is
+  plain text in the chip instead of a nested superscript, and the lowercase look comes from the CSS.
+*/ -}}
+{{- define "main" }}
+
+{{- if .Title }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+</header>
+{{- end }}
+
+<ul class="terms-tags pl-tags">
+    {{- $type := .Type }}
+        {{- range $key, $value := .Data.Terms.Alphabetical }}
+            {{- $name := .Name }}
+            {{- $count := .Count }}
+            {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+            <li>
+                <a class="pl-tag" href="{{ .Permalink }}">{{ .LinkTitle }} <span class="pl-tag-count">{{ $count }}</span></a>
+            </li>
+        {{- end }}
+    {{- end }}
+</ul>
+
+{{- end }}{{/* end main */ -}}

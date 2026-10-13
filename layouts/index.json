@@ -1,0 +1,17 @@
+{{- /*
+  Copy of PaperMod's layouts/index.json. Added fields for the search result rows (PostCard): excerpt, date,
+  readtime and tags, formatted as in layouts/partials/pl-post-row.html. title, content, permalink and summary
+  are as before, so what Fuse searches does not change.
+*/ -}}
+{{- $.Scratch.Add "index" slice -}}
+{{- range site.RegularPages -}}
+    {{- if and (not .Params.searchHidden) (ne .Layout `archives`) (ne .Layout `search`) }}
+    {{- $tags := slice }}
+    {{- range .Params.tags }}{{ $tags = $tags | append (replace . " " "-") }}{{ end }}
+    {{- $date := "" }}{{ if not .Date.IsZero }}{{ $date = time.Format ":date_medium" .Date }}{{ end }}
+    {{- $readtime := "" }}{{ if (.Param "ShowReadingTime") }}{{ $readtime = printf "%d min read" .ReadingTime }}{{ end }}
+    {{- $excerpt := printf "%s%s" (.Summary | plainify | htmlUnescape) (cond .Truncated "..." "") }}
+    {{- $.Scratch.Add "index" (dict "title" .Title "content" .Plain "permalink" .Permalink "summary" .Summary "excerpt" $excerpt "date" $date "readtime" $readtime "tags" $tags) -}}
+    {{- end }}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

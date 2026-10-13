@@ -1,0 +1,100 @@
+/*
+ * The home page intro (hero), from the Pras' Labs design system (github.com/pras-labs/design): ui_kits/homepage.
+ * The intro is PaperMod's home_info block, with the title, text and social icons from homeInfoParams in hugo.yaml.
+ * The kit's two buttons and its terminal prompt line are not used (decision by the site owner).
+ *
+ * Deviation, on purpose: the kit centers the hero in the 1040px wide box, so its left edge is the wordmark's, while
+ * the feed is the 700px column. Here the hero sits in the same 700px column as the feed. Breaking out to the wide
+ * box needs the viewport width, which includes the scrollbar, so on a desktop with a classic scrollbar the hero's
+ * left edge would be off the wordmark's by half the scrollbar width.
+ */
+
+/* ---- Block: sized by its content, spacing from the scale (space-8 above and below; one register down under 748px,
+   bp-md). The kit has space-9 above, 96px; 64px here because the intro has no buttons and sits right under the Nav.
+   PaperMod gives the block a 320px minimum height and centers it. ---- */
+
+.first-entry.home-info {
+    display: block;
+    min-height: 0;
+    margin: 64px 0;                       /* space-8 */
+}
+
+@media (max-width: 747.98px) {
+    .first-entry.home-info {
+        margin: 32px 0 48px;              /* space-6, space-7 */
+    }
+}
+
+/* ---- Title: hero size, fluid 40px to 80px. PaperMod clamps the header to three lines and hides the overflow. ---- */
+
+.first-entry.home-info .entry-header {
+    display: block;
+    overflow: visible;
+}
+
+.first-entry.home-info .entry-header h1 {
+    max-width: 16ch;
+    margin: 0 0 24px;                     /* space-5 */
+    font-size: clamp(2.5rem, 6vw + 1rem, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;              /* tracking-tight */
+    line-height: 1.15;                    /* leading-tight */
+    overflow-wrap: anywhere;
+}
+
+/* ---- Lede: serif, secondary color, 18px (19px from 480px), 62ch at most ---- */
+
+.home-info .entry-content {
+    max-width: 62ch;
+    margin: 0;
+    font-family: var(--pl-body);
+    font-size: 1.125rem;
+    line-height: 1.8;                     /* leading-relaxed */
+    color: var(--secondary);
+}
+
+@media (min-width: 480px) {
+    .home-info .entry-content {
+        font-size: 1.1875rem;             /* text-md, 19px */
+    }
+}
+
+.home-info .entry-content p {
+    margin: 0;
+    font-size: inherit;
+}
+
+/* ---- Social icons: where the kit has its buttons. Each icon is a 46px control (26px glyph, 10px padding) and
+   the row is pulled out by that padding, so the first glyph sits on the text edge, as for the Nav items. ---- */
+
+.home-info .entry-footer {
+    margin-top: 22px;                     /* 32px (space-6) to the glyphs */
+}
+
+.home-info .social-icons {
+    margin-inline-start: -10px;
+}
+
+.home-info .social-icons a:first-of-type {
+    padding-inline-start: 10px;
+}
+
+/* Press fills the icon with surface-hover at once; hover does the same where the device can hover, with a 120ms fade. */
+.home-info .social-icons a {
+    color: var(--secondary);
+    border-radius: 4px;
+    transition: background-color var(--pl-duration-fast) var(--pl-ease), color var(--pl-duration-fast) var(--pl-ease);
+}
+
+.home-info .social-icons a:active {
+    color: var(--primary);
+    background: var(--pl-surface-hover);
+    transition: none;
+}
+
+@media (hover: hover) {
+    .home-info .social-icons a:hover {
+        color: var(--primary);
+        background: var(--pl-surface-hover);
+    }
+}

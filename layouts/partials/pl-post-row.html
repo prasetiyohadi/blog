@@ -1,0 +1,27 @@
+{{- /*
+  Pras' Labs PostCard (components/core/PostCard in github.com/pras-labs/design): the repeating row of the feed.
+  No thumbnail, no card border or shadow, a hairline between rows. The whole row is one link: the title is the
+  link and its ::after covers the row (assets/css/extended/pras-labs-list.css). Tags are static labels, not links.
+  Arguments: page (the post), excerpt (bool, false in the archive), heading (title element, default h2; the
+  archive uses h4 because its year and month headings are h2 and h3).
+  The search page builds the same markup in assets/js/fastsearch.js; keep the two in step.
+*/ -}}
+{{- $p := .page }}
+{{- $h := .heading | default "h2" }}
+<article class="pl-post">
+  {{ printf "<%s class=\"pl-post-title\">" $h | safeHTML }}<a class="pl-post-link" href="{{ $p.Permalink }}">{{ $p.Title | plainify | htmlUnescape }}</a>{{ printf "</%s>" $h | safeHTML }}
+  {{- if and .excerpt (ne ($p.Param "hideSummary") true) }}
+  <p class="pl-post-excerpt">{{ $p.Summary | plainify | htmlUnescape }}{{ if $p.Truncated }}...{{ end }}</p>
+  {{- end }}
+  {{- if not ($p.Param "hideMeta") }}
+  <div class="pl-post-meta">
+    <span class="pl-post-date">
+      {{- with $p.Date }}{{ if not .IsZero }}<time datetime="{{ .Format "2006-01-02" }}">{{ time.Format ":date_medium" . }}</time>{{ end }}{{ end -}}
+      {{- if ($p.Param "ShowReadingTime") }} · {{ printf "%d min read" $p.ReadingTime }}{{ end -}}
+    </span>
+    {{- range $p.Params.tags }}
+    <span class="pl-post-tag">#{{ replace . " " "-" }}</span>
+    {{- end }}
+  </div>
+  {{- end }}
+</article>

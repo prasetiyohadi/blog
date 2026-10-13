@@ -21,4 +21,4 @@ This blog is where I write up what I build and break in my homelab.
 
 - [Resume (PDF)](/resume.pdf)
 - [GitHub](https://github.com/prasetiyohadi), [GitLab](https://gitlab.com/prasetiyohadi), [LinkedIn](https://linkedin.com/in/prasetiyohadi)
-- Email: [prasetiyohadi92@gmail.com](mailto:prasetiyohadi92@gmail.com)
+- Email: [hello@pras.my.id](mailto:hello@pras.my.id)

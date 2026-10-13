@@ -1,0 +1,91 @@
+/*
+ * Author block at the end of a post, from the Pras' Labs design system (github.com/pras-labs/design):
+ * components/core/AuthorBio and ui_kits/blog-post (.bio). Markup is in layouts/partials/extend_post_content.html.
+ * The warm accent is the one the design system keeps for this block, so its tokens live here.
+ */
+
+:root {
+    --pl-accent-warm: #925320;           /* 5.7:1 on bg */
+    --pl-accent-warm-border: #9253204d;
+    --pl-surface-2: #f4f0e7;
+}
+
+:root[data-theme="dark"] {
+    --pl-accent-warm: #e0995b;
+    --pl-accent-warm-border: #e0995b4d;
+    --pl-surface-2: #262019;
+}
+
+/* No JavaScript: follow the system setting, same values as the dark block above */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --pl-accent-warm: #e0995b;
+        --pl-accent-warm-border: #e0995b4d;
+        --pl-surface-2: #262019;
+    }
+}
+
+/* Print always uses the light tokens */
+@media print {
+    :root,
+    :root[data-theme="dark"],
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --pl-accent-warm: #925320;
+        --pl-accent-warm-border: #9253204d;
+        --pl-surface-2: #f4f0e7;
+    }
+}
+
+/* Space-8 above the rule and space-6 below it; one register down under 748px (space-8 becomes space-7). */
+.pl-author-bio {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+
+@media (max-width: 747.98px) {
+    .pl-author-bio {
+        margin-top: 48px;
+    }
+}
+
+.pl-author-avatar {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;            /* radius-full: reserved for Tag chips and this avatar */
+    border: 1px solid var(--pl-accent-warm-border);
+    background: var(--pl-surface-2);
+    object-fit: cover;
+}
+
+.pl-author-text {
+    min-width: 0;
+}
+
+.pl-author-name {
+    font-family: var(--pl-heading);
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.pl-author-role {
+    margin: 2px 0 6px;
+    font-family: var(--pl-heading);
+    font-size: 0.8125rem;            /* text-xs, 13px */
+    letter-spacing: 0.04em;          /* tracking-wide */
+    text-transform: uppercase;
+    color: var(--pl-accent-warm);
+}
+
+.pl-author-text p {
+    max-width: 56ch;
+    margin: 0;
+    font-family: var(--pl-body);
+    font-size: 0.875rem;             /* text-sm, 14px */
+    line-height: 1.8;                /* leading-relaxed */
+    color: var(--secondary);
+}

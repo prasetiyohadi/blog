@@ -7,6 +7,7 @@ cover:
   image: "/images/2026-10-01-nas-click-noise-pbs-backup-gap.header.png"
   alt: "Proxmox Backup Server task log: excluding bind mount point mp0 from backup (not a volume), followed by TASK OK"
   relative: false
+  hiddenInSingle: true   # the card repeats the title; it stays the social preview image
 ---
 
 ## Symptom

@@ -6,6 +6,10 @@
  * The Nav has no horizontal padding of its own. PaperMod's .header-nav takes it from --gap, which
  * pras-labs.css sets to the page padding (16px below 480px, 24px from 480px). The one-row width
  * below depends on it, so re-measure if either changes.
+ *
+ * Items: the box is the label plus 8px each side (space-2), 44px tall, 4px apart, so the gap between two
+ * labels is 20px for every pair. The 44px is the hit area, not the box: a pseudo-element widens short labels.
+ * The groups are pulled out by 8px so the first and last label sit on the content edge.
  */
 
 .header {
@@ -26,11 +30,15 @@
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+    padding: 0 8px;
+    margin-inline-start: -8px;
     color: var(--primary);
+    border-radius: 4px;
     font-family: var(--pl-mono);
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
+    transition: background-color var(--pl-duration-fast) var(--pl-ease);
 }
 
 .pl-wordmark > span {
@@ -50,14 +58,21 @@
     display: inline-flex;
 }
 
-/* Hover and press shift to accent-strong. Hover only where the device can hover, so a tap leaves nothing behind. */
+/*
+ * Hover and press: a surface-hover fill plus an underline (the wordmark is already text-primary, so there is no
+ * color pair to widen). Press is instant: no transition on the way in, the fade runs on release. Hover only
+ * where the device can hover, so a tap leaves nothing behind.
+ */
 .pl-wordmark:active {
-    color: var(--pl-accent-strong);
+    background: var(--pl-surface-hover);
+    text-decoration: underline;
+    transition: none;
 }
 
 @media (hover: hover) {
     .pl-wordmark:hover {
-        color: var(--pl-accent-strong);
+        background: var(--pl-surface-hover);
+        text-decoration: underline;
     }
 }
 
@@ -65,28 +80,44 @@
 .pl-nav-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0 16px;
+    gap: 0 4px;
+    margin-inline: -8px;
 }
 
-/* Nav item, shared with the footer links: 44px target, 14px, secondary text, 2px rule under the current one */
+/*
+ * Nav item, shared with the footer links: 14px, secondary text, 44px tall, label plus 8px each side. There is
+ * no min-width: a short label such as "RSS" keeps its 44px hit area from the pseudo-element below.
+ * Neighbouring hit areas must not overlap: the 4px gap covers labels 20px wide or more.
+ */
 .pl-nav-item {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-width: 44px;
     min-height: 44px;
-    padding: 0;
+    padding: 0 8px;
     color: var(--secondary);
-    background: none;
+    background: transparent;
     border: 0;
+    border-radius: 4px;
     cursor: pointer;
     font-family: var(--pl-heading);
     font-size: 14px;
     font-weight: 500;
     line-height: 1.35;
     text-decoration: none;
-    transition: color 150ms ease;
+    transition: color var(--pl-duration-fast) var(--pl-ease), background-color var(--pl-duration-fast) var(--pl-ease);
+}
+
+.pl-nav-item::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
 }
 
 .pl-nav-item > span {
@@ -94,10 +125,7 @@
     border-bottom: 2px solid transparent;
 }
 
-/*
- * Hover and press shift the color to accent-strong, the same shift for both. Hover only under (hover: hover).
- * The current item keeps text-primary on hover and press and shows its state with the accent underline.
- */
+/* Current page: primary text and a 2px accent rule */
 .pl-nav-item[aria-current="page"] {
     color: var(--primary);
 }
@@ -106,20 +134,30 @@
     border-bottom-color: var(--pl-accent);
 }
 
+/*
+ * Hover and press, two cues. (1) A surface-hover fill behind the item, which cannot be mistaken for the 2px
+ * accent rule of the current item. (2) A non-current label goes from text-secondary to text-primary: 2.58:1 in
+ * light, 2.16:1 in dark, above the design system's 2:1 floor (the accent pair is only 1.41:1 in light). The
+ * current item keeps text-primary and shows the fill only. Press shows the same as hover, with no transition
+ * on the way in, so a 100ms tap shows the full state; the fade runs on release. Hover only under
+ * (hover: hover), so a tap leaves nothing behind.
+ */
+.pl-nav-item:active {
+    background: var(--pl-surface-hover);
+    transition: none;
+}
+
 .pl-nav-item:not([aria-current="page"]):active {
-    color: var(--pl-accent-strong);
+    color: var(--primary);
 }
 
 @media (hover: hover) {
-    .pl-nav-item:not([aria-current="page"]):hover {
-        color: var(--pl-accent-strong);
+    .pl-nav-item:hover {
+        background: var(--pl-surface-hover);
     }
-}
 
-@media (max-width: 479.98px) {
-    .pl-nav-links,
-    .pl-footer-links {
-        column-gap: 12px;
+    .pl-nav-item:not([aria-current="page"]):hover {
+        color: var(--primary);
     }
 }
 
@@ -180,20 +218,22 @@
      * width that needs two rows, then rounded up by about 8px for font rendering differences between
      * platforms. From W up the link group is hidden while the field has focus.
      *
-     * Measured with the real fonts, the longer "Theme: Light" label, two links (Posts, About) and the real
-     * page padding: two rows at 490px, one row from 491px up. W is 491px ("Theme: Dark" gives 488px), so
-     * the value is 500px. Page padding steps from 24px to 16px at 480px, so the Nav is also one row from
-     * 466px to 479px and two rows from 480px to 490px: the first width that fits when scanning down from
-     * 479px would be wrong. The rule does not apply below 500px, which is the safe side.
+     * Measured with the real fonts, the longer "Theme: Light" label, two links (Posts, About), the round 3 item
+     * boxes (label plus 8px each side, 4px apart) and the real page padding: two rows at 497px, one row from
+     * 498px up (496px with "Theme: Dark"). There is no narrower one-row range now (the item padding made the
+     * row wider than before), so the scan has a single transition. Rounded up by about 8px for font rendering
+     * differences between platforms, and to a round number: 510px. Below 510px the rule does not apply,
+     * which is the safe side. Page padding steps from 24px to 16px at 480px, which is why the scan must run
+     * from wide to narrow.
      *
-     * This is not the design system's 609px (616px in its core.css), which is for its own three links. Too
+     * This is not the design system's 629px (640px in its core.css), which is for its own three links. Too
      * low shifts the page when the field takes focus; too high only keeps the links visible a little longer.
      * Re-measure if the menu, the labels, the fonts or the page padding change.
      *
      * Hidden by clipping, never display: none or visibility: hidden. Those remove the links from the tab
      * order, and Tab from the field would skip Posts, About and the theme button.
      */
-    @media (min-width: 500px) {
+    @media (min-width: 510px) {
         .pl-nav:has(.pl-field:focus) .pl-nav-links {
             position: absolute;
             width: 1px;

@@ -47,6 +47,17 @@ params:
   env: production
   description: "Strategic Infrastructure Architect with over a decade of experience driving the evolution of high-scale platforms."
   author: "Prasetiyo Hadi Purwoko"
+
+  # Author block at the end of every post (layouts/partials/extend_post_content.html). Text from the LinkedIn About.
+  authorBio:
+    role: "Infrastructure Architect"
+    avatar: "/images/me.jpg"
+    blurb: >-
+      Infrastructure Architect with 8+ years of experience driving platform evolution at scale, from bare-metal
+      data centers to multi-cloud architectures serving millions of users. At Bukalapak, led the shift to
+      enterprise-grade IaC and GitOps practices that standardized how engineering teams ship and operate.
+      Comfortable owning long-term platform decisions, not just executing them.
+
   mainSections: ["blogs"]
   defaultTheme: auto
   ShowReadingTime: true

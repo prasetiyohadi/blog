@@ -2,12 +2,15 @@
   Author block at the end of a post, from the design system's AuthorBio (components/core/AuthorBio, the flat
   end-of-article form of ui_kits/blog-post). PaperMod renders this partial after the post body and before the
   footer (tags, previous/next). Text, role and photo come from params.authorBio in hugo.yaml.
+  If the photo fails to load, onerror swaps it for an empty span with the same class, so the browser draws no
+  broken-image icon and the empty surface-2 disc with the warm ring stays (README "States"); the name and role
+  stay too.
   Posts only: the About page is a page of the root section, not of "blogs".
 */ -}}
 {{- with site.Params.authorBio }}
 {{- if eq $.Section "blogs" }}
 <div class="pl-author-bio">
-    {{- with .avatar }}<img class="pl-author-avatar" src="{{ . | relURL }}" alt="" width="44" height="44" loading="lazy" decoding="async">{{ end }}
+    {{- with .avatar }}<img class="pl-author-avatar" src="{{ . | relURL }}" alt="" width="44" height="44" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:this.className}))">{{ end }}
     <div class="pl-author-text">
         <div class="pl-author-name">{{ site.Params.author }}</div>
         {{- with .role }}<div class="pl-author-role">{{ . }}</div>{{ end }}

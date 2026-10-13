@@ -1,0 +1,119 @@
+/*
+ * Empty, loading, no-result and error states, and the Button, from the Pras' Labs design system
+ * (github.com/pras-labs/design): README "States" and "Search", components/core/feed-states.card.html and Button.
+ * Used by the search results page (assets/js/fastsearch.js), the 404 page (layouts/404.html) and a post list
+ * with no posts (layouts/list.html). The danger and surface-2 tokens are defined in pras-labs-code.css and
+ * pras-labs-author.css.
+ */
+
+/* ---- State message: heading family, label size, left-aligned in the reading column, the footprint of a
+   PostCard row (space-6 above and below, a hairline under it). Say what happened, then what to do. ---- */
+
+.pl-state {
+    padding: 32px 0;                       /* space-6 */
+    border-bottom: 1px solid var(--border);
+    font-family: var(--pl-heading);
+    font-size: 0.875rem;                   /* text-sm, label size */
+    color: var(--primary);
+}
+
+.pl-state p {
+    max-width: 62ch;
+    margin: 0 0 12px;                      /* space-3 */
+    line-height: 1.7;                      /* leading-body */
+}
+
+.pl-state > :last-child {
+    margin-bottom: 0;
+}
+
+/* Error: danger text. The words carry the meaning; the color is the second cue. */
+.pl-state--error p {
+    color: var(--pl-danger);
+}
+
+/* Loading: three bars of surface-2, no shimmer, then the words "Loading posts" */
+.pl-state-bars {
+    display: grid;
+    gap: 8px;                              /* space-2 */
+    margin-bottom: 12px;                   /* space-3 */
+}
+
+.pl-state-bars i {
+    display: block;
+    height: 14px;
+    border-radius: 4px;                    /* radius-sm */
+    background: var(--pl-surface-2);
+}
+
+.pl-state-bars i:nth-child(1) { width: 55%; }
+.pl-state-bars i:nth-child(2) { width: 90%; }
+.pl-state-bars i:nth-child(3) { width: 35%; }
+
+/* The live region is a focus target for the script only (tabindex="-1"), not a control, so it has no ring. */
+.pl-search-state[tabindex]:focus {
+    outline: none;
+}
+
+/* ---- Search results: the count line ("2 posts match "gitops""), text-secondary under the h1 ---- */
+
+.pl-result-count {
+    margin: 24px 0 0;                      /* space-5 */
+    font-family: var(--pl-heading);
+    font-size: 0.875rem;                   /* text-sm */
+    color: var(--secondary);
+}
+
+/* ---- Button: ghost and secondary (the two the states use). 44px tall, label says what happens, no glyphs.
+   Press has no transition on the way in; hover is the same, only where the device can hover. ---- */
+
+.pl-btn {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: 4px;                    /* radius-sm */
+    background: transparent;
+    font-family: var(--pl-heading);
+    font-size: 0.875rem;                   /* text-sm */
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color var(--pl-duration-fast) var(--pl-ease), border-color var(--pl-duration-fast) var(--pl-ease);
+}
+
+.pl-btn--ghost {
+    color: var(--pl-accent);
+}
+
+.pl-btn--secondary {
+    color: var(--primary);
+    border-color: var(--pl-border-control);
+}
+
+.pl-btn:active {
+    transition: none;
+}
+
+.pl-btn--ghost:active {
+    color: var(--pl-accent-strong);
+}
+
+.pl-btn--secondary:active {
+    color: var(--pl-accent-strong);
+    border-color: var(--pl-accent);
+}
+
+@media (hover: hover) {
+    .pl-btn--ghost:hover {
+        color: var(--pl-accent-strong);
+    }
+
+    .pl-btn--secondary:hover {
+        color: var(--pl-accent-strong);
+        border-color: var(--pl-accent);
+    }
+}

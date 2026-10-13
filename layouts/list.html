@@ -1,6 +1,6 @@
 {{- /*
   Copy of PaperMod's layouts/list.html, changed for the Pras' Labs design system (PostCard, Button).
-  Changes: each entry is the pl-post-row partial instead of PaperMod's card (cover images are not shown in lists:
+  Changes: pages after the first of the home list get a visually hidden h1; each entry is the pl-post-row partial instead of PaperMod's card (cover images are not shown in lists:
   PostCard has no thumbnail; the cover stays on the post page), and the pagination links have no arrow glyphs
   (Button: "No arrow glyphs"). Everything else is the theme's.
 */ -}}
@@ -55,6 +55,9 @@
 
 {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
 {{- partial "home_info.html" . }}
+{{- else if and .IsHome (gt $paginator.PageNumber 1) }}
+{{- /* Page 2 and later have no hero, so no h1: a heading for screen readers, the site title, not shown. */}}
+<h1 class="pl-visually-hidden">{{ .Title }}</h1>
 {{- end }}
 
 {{- range $paginator.Pages }}

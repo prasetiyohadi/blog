@@ -179,3 +179,14 @@ details.toc .inner a:active {
         background: var(--pl-surface-hover);
     }
 }
+
+/* ---- About: the list of links (resume, profiles, email) ----
+   Each link is a control of its own, not a link inside a sentence, so it gets the 44px hit area the design
+   system's contact row has (ui_kits/about-consulting, .contact a). Scoped to pages without a byline (front matter
+   hidemeta: true, today only About): the same rule on a list item that mixes a link with sentence text, such as a
+   References entry, pulls the text onto a new line. */
+.post-single:not(:has(.post-meta)) .md-content li:has(> a):not(:has(> :not(a))) > a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}

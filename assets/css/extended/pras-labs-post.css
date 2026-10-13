@@ -1,0 +1,181 @@
+/*
+ * The post page, from the Pras' Labs design system (github.com/pras-labs/design): ui_kits/blog-post and
+ * components/core/ArticleMeta. Code blocks are in pras-labs-code.css, tags at the end of a post in
+ * pras-labs-list.css (Tag chips).
+ */
+
+/* ---- Title and byline ---- */
+
+.post-title {
+    margin: 0 0 16px;                     /* space-4 */
+}
+
+/* ArticleMeta: date / read time / #tags. Date and read time stay together; the tags drop to their own line
+   when there is no room. The "/" separators are decorative. */
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+    margin-bottom: 48px;                  /* space-7 */
+    font-family: var(--pl-heading);
+    font-size: 0.8125rem;                 /* text-xs, 13px */
+}
+
+.pl-meta-when {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;               /* tracking-wide */
+    text-transform: uppercase;
+    color: var(--pl-text-tertiary);
+}
+
+.pl-meta-sep {
+    color: var(--tertiary);               /* border-strong, as a solid color */
+}
+
+.pl-meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+}
+
+.post-header .pl-post-tag {
+    color: var(--secondary);
+}
+
+/* ---- Reading rhythm ---- */
+
+/* Paragraph, heading and quote spacing from the scale. Below 748px (bp-md) the steps are one register down. */
+/* PaperMod spaces paragraphs, lists, figures and tables with --content-gap */
+.md-content {
+    --content-gap: 24px;                  /* space-5 */
+}
+
+.md-content h2 {
+    font-weight: 600;
+    margin: 64px 0 16px;                  /* space-8, space-4 */
+}
+
+.md-content h3 {
+    margin: 48px 0 12px;                  /* space-7, space-3 */
+}
+
+/* A heading that opens the article text does not need the section gap above it. */
+.md-content > h2:first-child,
+.md-content > h3:first-child {
+    margin-top: 0;
+}
+
+.md-content blockquote {
+    margin: 48px 0;                       /* space-7 */
+    padding: 0 0 0 24px;                  /* space-5 */
+    border-inline-start: 2px solid var(--pl-accent);
+    font-family: var(--pl-body);
+    font-style: italic;
+    font-size: 1.1875rem;                 /* text-md, 19px */
+    color: var(--primary);
+}
+
+.md-content blockquote p {
+    font-size: inherit;
+}
+
+.md-content blockquote p:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+@media (max-width: 747.98px) {
+    .md-content h2 { margin-top: 48px; }
+    .md-content h3 { margin-top: 32px; }
+    .md-content blockquote { margin: 32px 0; padding-inline-start: 16px; }
+    .post-meta { margin-bottom: 32px; }   /* space-6 */
+}
+
+/* ---- Table of contents: the summary is a 44px control ---- */
+
+details.toc {
+    margin-bottom: 32px;
+}
+
+details.toc summary {
+    box-sizing: border-box;
+    min-height: 44px;
+    padding-block: 10px;
+    line-height: 24px;
+    transition: background-color var(--pl-duration-fast) var(--pl-ease);
+}
+
+details.toc summary:active {
+    background: var(--pl-surface-hover);
+    transition: none;
+}
+
+@media (hover: hover) {
+    details.toc summary:hover {
+        background: var(--pl-surface-hover);
+    }
+}
+
+/* The entries are links of their own, not links in running prose, so each has a 44px hit area. Press and hover
+   underline the entry; PaperMod's hover underline sticks after a tap, so it is only applied where the device can
+   hover. */
+details.toc .inner li {
+    margin: 0;
+}
+
+details.toc .inner a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
+}
+
+details.toc .inner a:hover {
+    text-decoration: none;
+}
+
+details.toc .inner a:active {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+}
+
+@media (hover: hover) {
+    details.toc .inner a:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.3rem;
+    }
+}
+
+/* ---- End of the post: tags, then previous and next ---- */
+
+.post-footer {
+    margin-top: 32px;                     /* space-6 */
+}
+
+.post-tags {
+    margin-bottom: 32px;                  /* keeps the chips' 44px hit areas off the previous/next box */
+}
+
+/* Previous and next post. Press fills the link, with no transition on the way in; hover does the same only
+   where the device can hover (PaperMod's own hover fill sticks after a tap). */
+.paginav a {
+    transition: background-color var(--pl-duration-fast) var(--pl-ease);
+}
+
+.paginav a:hover {
+    background: transparent;
+}
+
+.paginav a:active {
+    background: var(--pl-surface-hover);
+    transition: none;
+}
+
+@media (hover: hover) {
+    .paginav a:hover {
+        background: var(--pl-surface-hover);
+    }
+}

@@ -3,5 +3,6 @@
 *.swp
 public/
 resources/
+.hugo_build.lock
 
 themes/PaperMod/

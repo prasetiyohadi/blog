@@ -1,0 +1,16 @@
+{{- /*
+  Copy of PaperMod's layouts/_partials/post_meta.html, changed to the design system's ArticleMeta
+  (components/core/ArticleMeta): an exact date, the read time, then the tags as static labels, with decorative "/"
+  separators. No author (the page is the author's), no word count. Used under the title of a post.
+  List rows build the same facts in layouts/partials/pl-post-row.html, with "·" separators as PostCard does.
+*/ -}}
+<span class="pl-meta-when">
+    {{- with .Date }}{{ if not .IsZero }}<time datetime="{{ .Format "2006-01-02" }}">{{ time.Format ":date_medium" . }}</time>{{ end }}{{ end -}}
+    {{- if (.Param "ShowReadingTime") }}<span class="pl-meta-sep" aria-hidden="true">/</span><span>{{ printf "%d min read" .ReadingTime }}</span>{{ end -}}
+</span>
+{{- with .Params.tags }}
+<span class="pl-meta-sep" aria-hidden="true">/</span>
+<span class="pl-meta-tags">
+    {{- range . }}<span class="pl-post-tag">#{{ replace . " " "-" }}</span>{{ end -}}
+</span>
+{{- end }}

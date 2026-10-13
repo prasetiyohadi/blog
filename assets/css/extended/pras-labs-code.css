@@ -112,6 +112,28 @@
     overflow: hidden;
 }
 
+/* Indented code blocks (older posts) skip the render hook, so they have no .highlight wrapper.
+   PaperMod gives them light text for its always-dark block, which on the light block ground is 1.3:1.
+   Same palette and frame as hooked blocks. They wrap instead of scrolling: a bare <pre> cannot take
+   tabindex, so a scrolling one would be unreachable by keyboard. */
+.md-content pre:not(.chroma) {
+    margin: 0;
+    border: 1px solid var(--pl-code-border);
+    border-radius: 8px;
+}
+
+.md-content pre:not(.chroma) > code {
+    padding: 16px 18px;
+    color: var(--pl-code-fg);
+    font-size: 14px;
+    line-height: 1.6;
+    border-radius: 0;
+    overflow: visible;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
 /* The <pre> is the scroller (Hugo gives it tabindex="0"), so a keyboard user can scroll it */
 .md-content .highlight pre.chroma {
     overflow-x: auto;

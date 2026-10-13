@@ -6,7 +6,8 @@
 */ -}}
 {{- $lang := .Type | default "text" -}}
 {{- $title := .Attributes.title | default "" -}}
-{{- $label := cond (ne $title "") $title (printf "%s code" $lang) -}}
+{{- /* Without a title the name is "<language> code N", N counting the blocks on the page, so no two regions share a name (axe landmark-unique). */ -}}
+{{- $label := cond (ne $title "") $title (printf "%s code %d" $lang (add .Ordinal 1)) -}}
 {{- $html := transform.Highlight .Inner $lang .Options | string -}}
 {{- $html = replace $html `<pre tabindex="0"` (printf `<pre tabindex="0" role="region" aria-label="%s"` (htmlEscape $label)) 1 -}}
 {{- if ne $title "" -}}

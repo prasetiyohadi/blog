@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "LVM: Adding New Physical Volume to Volume Group"
-date: 2014-07-01 09:00:00
+date: 2014-07-01 12:00:00
 categories: sysadmin
 tags:
   - sysadmin

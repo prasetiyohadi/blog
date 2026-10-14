@@ -72,23 +72,23 @@ We can use `help()` function to get quick information about any function or stat
 
 `if` statement to check a condition and if the condition is true, we run a block of statements (called the _if-block_).
 
-{% highlight python %}
-number = 25
-guess = int(raw_input('Guess a number : '))
-if guess == number:
-print "You've guessed the number."
+    {% highlight python %}
+    number = 25
+    guess = int(raw_input('Guess a number : '))
+    if guess == number:
+        print "You've guessed the number."
 
-\# optional
+    # optional
 
-elif guess > number:
-print "The number is lower than that."
+    elif guess > number:
+        print "The number is lower than that."
 
-\# optional
+    # optional
 
-else:
-print "The number is higher than that."
-print "Done."
-{% endhighlight %}
+    else:
+        print "The number is higher than that."
+    print "Done."
+    {% endhighlight %}
 
 `while` statement allows you to repeatedly execute a block of statements as long as a condition is true.
 
@@ -258,10 +258,11 @@ One way Python make importing a module faster is to create _byte-compiled_ files
         print 'I am being imported from another module'
 
 You can create your own module just by creating a Python source code, just make sure it has **.py** extension.
-\# !/usr/bin/python # Filename: mymodule.py
-def sayhello():
-print 'Hello, this is mymodule speaking.'
-version = '0.1' # End of mymodule.py
+
+    # !/usr/bin/python # Filename: mymodule.py
+    def sayhello():
+        print 'Hello, this is mymodule speaking.'
+    version = '0.1' # End of mymodule.py
 
 Then you can import the module.
 

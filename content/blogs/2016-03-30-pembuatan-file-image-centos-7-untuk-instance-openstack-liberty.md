@@ -1,5 +1,6 @@
 ---
 layout: single
+lang: id
 title: Pembuatan File Image CentOS 7 Untuk Instance OpenStack Liberty
 date: 2016-03-30T18:20:17+07:00
 excerpt:

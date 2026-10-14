@@ -1,5 +1,6 @@
 ---
 layout: single
+lang: id
 title: "Membuat Virtual Machine di FreeBSD dengan bhyve dan vm-bhyve"
 date: 2016-03-22 07:00:00
 categories: sysadmin

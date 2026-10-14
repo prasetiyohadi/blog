@@ -1,5 +1,6 @@
 ---
 layout: single
+lang: id
 title: Konfigurasi Email Server Dengan SPF Dan DKIM Di Aplikasi Postfix Pada CentOS 7
 date: 2016-03-27T12:59:09+07:00
 excerpt:

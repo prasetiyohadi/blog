@@ -1,5 +1,6 @@
 ---
 layout: single
+lang: id
 title: "Akuisisi Data Sensor LM35 dengan Arduino"
 date: 2015-03-20 07:00:00
 categories: engineering

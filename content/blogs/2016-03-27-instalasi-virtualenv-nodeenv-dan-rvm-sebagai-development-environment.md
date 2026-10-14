@@ -1,5 +1,6 @@
 ---
 layout: single
+lang: id
 title: Instalasi Virtualenv, Nodeenv Dan RVM Sebagai Development Environment
 modified:
 categories: sysadmin

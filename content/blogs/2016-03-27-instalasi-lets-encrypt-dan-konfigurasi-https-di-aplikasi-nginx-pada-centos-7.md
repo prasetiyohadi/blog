@@ -1,5 +1,6 @@
 ---
 layout: single
+lang: id
 title: Instalasi Let's Encrypt Dan Konfigurasi HTTPS Di Aplikasi Nginx Pada CentOS 7
 modified:
 categories: sysadmin

@@ -72,7 +72,6 @@ We can use `help()` function to get quick information about any function or stat
 
 `if` statement to check a condition and if the condition is true, we run a block of statements (called the _if-block_).
 
-    {% highlight python %}
     number = 25
     guess = int(raw_input('Guess a number : '))
     if guess == number:
@@ -88,11 +87,9 @@ We can use `help()` function to get quick information about any function or stat
     else:
         print "The number is higher than that."
     print "Done."
-    {% endhighlight %}
 
 `while` statement allows you to repeatedly execute a block of statements as long as a condition is true.
 
-    {% highlight python %}
     number = 25
     running = True
     while running:
@@ -109,7 +106,6 @@ We can use `help()` function to get quick information about any function or stat
     else:
      print "The game is over."
     print "Done."
-    {% endhighlight %}
 
 `for..in` statement is another looping statement which iterates over a sequence of objects.
 

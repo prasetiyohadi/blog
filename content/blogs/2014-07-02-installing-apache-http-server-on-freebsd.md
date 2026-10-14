@@ -8,8 +8,6 @@ tags:
 comments: true
 ---
 
-# Installing Apache HTTP Server on FreeBSD
-
 ## Installation
 
 ### Installation using FreeBSD ports

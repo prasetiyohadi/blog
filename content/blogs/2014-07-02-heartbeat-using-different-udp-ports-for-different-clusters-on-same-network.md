@@ -13,13 +13,13 @@ comments: true
 Heartbeat clusters work only one on same network so if we setup different cluster (different authkeys) on same network it will show up as an error in log file. We can still setup more than one cluster in same network by setting different communication port for heartbeat.
 
 The following example show configuration file for two different clusters in same network.
-#### host configuration
+## host configuration
 192.168.123.1 host1.cluster1
 192.168.123.2 host2.cluster1
 192.168.123.3 host1.cluster2
 192.168.123.4 host2.cluster2
-#### first cluster
-##### /etc/ha.d/ha.cf
+## first cluster
+### /etc/ha.d/ha.cf
 debugfile /var/log/ha-debug
 logfile /var/log/ha-log
 logfacility local0
@@ -31,8 +31,8 @@ bcast eth0
 node host1.cluster1 host2.cluster1
 auto_failback on
 debug 1
-#### second cluster
-##### /etc/ha.d/ha.cf
+## second cluster
+### /etc/ha.d/ha.cf
 debugfile /var/log/ha-debug
 logfile /var/log/ha-log
 logfacility local0

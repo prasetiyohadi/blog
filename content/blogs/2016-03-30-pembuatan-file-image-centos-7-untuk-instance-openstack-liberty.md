@@ -153,7 +153,7 @@ Package yang baru saja kita unduh harus dibangun ulang sehingga dapat diinstal
 di sistem operasi CentOS 7. Kita instal _tools_ yang diperlukan untuk melakukan
 proses _build_.
 
-    sudo yum install rpm-build  redhat-rpm-config gcc make
+    sudo yum install rpm-build redhat-rpm-config gcc make
     mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
     rpmbuild --rebuild cloud-init-0.7.6-2.el7.src.rpm
 

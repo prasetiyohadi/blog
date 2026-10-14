@@ -9,7 +9,7 @@ comments: true
 ---
 
 Hello, I want to share a documentation how to setup a mail server using CentOS 6.5 using [Postfix](http://www.postfix.org/) as [SMTP](http://tools.ietf.org/html/rfc5321) server and [Dovecot](http://www.dovecot.org/) as [IMAP](http://tools.ietf.org/html/rfc3501)/[POP3](http://tools.ietf.org/html/rfc1939) server. Postfix is a well known [Message Transfer Agent](http://en.wikipedia.org/wiki/Message_transfer_agent) that mostly used today and Dovecot is also one of the widely used [Mail User Agent](http://en.wikipedia.org/wiki/Email_client).
-### Preparing The Machine
+## Preparing The Machine
 In this documentation we use a CentOS 6.5 server and before we start, let's update the system.
 
     # yum update
@@ -23,7 +23,7 @@ A mail server needs to have a MX record in its DNS, so make sure we have that. I
     server.net.          80528   IN      NS      ns2.server.net.
     server.net.          80528   IN      NS      ns1.server.net.
 
-### Installing Postfix
+## Installing Postfix
 ![Postfix Logo](http://www.postfix.org/mysza.gif)
 
 Then install Postfix using yum if it's not already installed.
@@ -93,7 +93,7 @@ Restart Postfix,
 
     # service postfix restart
 
-### Installing Dovecot
+## Installing Dovecot
 ![Dovecot Logo](http://www.dovecot.org/dovecot.gif)
 
 Install Dovecot using yum,
@@ -178,7 +178,7 @@ Start Dovecot,
     # service dovecot start
     # chkconfig dovecot on
 
-### Testing Installation
+## Testing Installation
 Test your Postfix installation by sending a message using our newly installed server. Use **telnet** on your mail server on port **25**.
 
     $ telnet mail.server.net 25

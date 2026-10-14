@@ -28,7 +28,7 @@ consider myself as an "activist" in my campus although my skills make me more
 suitable as nerd, and yes, I am starting to think that I am more nerd right
 now.
 
-### My department?
+## My department?
 
 My department is Engineering Physics, a cool name, isn't it? But, I still don't
 know for clear what is the goal and the purpose of my own department. Some say
@@ -56,7 +56,7 @@ sensor. Who is responsible in providing the sensor which suits the needs of
 people in mining engineering? Us. We are responsible, because if it's not us,
 who else will?
 
-### My lab?
+## My lab?
 
 My lab is Computational Materials Design, you hear the name. Maybe you think
 that this lab is suitable for me, isn't. Not really, I still do not really into
@@ -85,7 +85,7 @@ and I do not like to be left behind. So, rather than struggling to study, I
 prefer to find a new field. So, my job now become my fall back, when I feel not
 motivated to study the theory. Honestly, this is what I feel now.
 
-### Now, what?
+## Now, what?
 
 I don't know. Tomorrow I have to give a presentation on my final project's
 progress, when there is still no progress at all. This is only me anyway, I am

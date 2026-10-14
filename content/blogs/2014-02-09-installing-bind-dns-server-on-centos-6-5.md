@@ -22,14 +22,14 @@ records](http://en.wikipedia.org/wiki/List_of_DNS_record_types). But, if you
 still want to set up your own Name server, I hope this documentation will be
 useful for you.
 
-#### BIND Name Server
+## BIND Name Server
 
 [BIND](https://www.isc.org/downloads/bind/) or Berkeley Internet Domain Name is
 open source software that implements the [Domain Name
 System](http://en.wikipedia.org/wiki/Domain_Name_System) protocols. This is a
 documentation of installing BIND on CentOS 6.5 operating system.
 
-### Getting Started
+## Getting Started
 
 Before we install BIND, or another software, always upgrade our system first.
 
@@ -155,7 +155,7 @@ For PTR record, if you are having difficulties to set the PTR record in your NS
 server (the IP still does not point to your domain name), ask your registrar to
 configure it for you.
 
-### Testing NS Server
+## Testing NS Server
 
 Change your DNS resolver to your NS server.
 

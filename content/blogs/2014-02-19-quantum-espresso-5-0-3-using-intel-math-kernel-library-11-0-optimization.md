@@ -10,16 +10,15 @@ comments: true
 ---
 
 [Quantum Espresso](http://www.quantum-espresso.org/) is a software for electronic-structure calculations and materials modeling at the nanoscale. The installation of Quantum Espresso is quite easy because it includes external libraries which it needs. But we are encouraged to install Quantum Espresso using our own machine optimized external libraries such as [Basic Linear Algebra Subprograms (BLAS)](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms), [Linear Algebra Package (LAPACK)](http://en.wikipedia.org/wiki/LAPACK), [Scalable LAPACK (SCALAPACK)](http://en.wikipedia.org/wiki/ScaLAPACK), and [Fastest Fourier Transform in the West (FFTW)](http://en.wikipedia.org/wiki/FFTW).
-### External Libraries
+## External Libraries
 There are several repositories or development teams which provide external libraries. For example is [Netlib](http://netlib.org/) which provides [BLAS](http://netlib.org/blas/), [LAPACK](http://netlib.org/lapack/), and [SCALAPACK](http://netlib.org/scalapack/). But, for machines with Intel processor, maybe the best external libraries out there is [Intel® Math Kernel Library](http://software.intel.com/en-us/intel-mkl) which has a non-commercial version as standalone or included in Intel® Parallel Studio XE 2013 for Linux that can be downloaded in [Intel Non-Commercial Software Development](http://software.intel.com/en-us/non-commercial-software-development). Intel® Math Kernel Library provides BLAS, LAPACK, SCALAPACK, and even FFTW interfaces.
-### Getting Started
+## Getting Started
 My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660 0 @ 2.20GHz with 8 cores and 16 threads and 64 GB RAM. For compilers I will be using Intel compilers which is included in Intel® Parallel Studio XE 2013 for Linux and OpenMPI for parallelization.
-#### Installing Intel® Parallel Studio XE 2013 for Linux
+### Installing Intel® Parallel Studio XE 2013 for Linux
 
     tar zxvf sources/parallel_studio_xe_2013_sp1_update1.tgz
     ./parallel_studio_xe_2013_sp1_update1/install.sh
 
-#
 
     Please make your selection by entering an option.
     Root access is recommended for evaluation.
@@ -33,7 +32,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
 
     Please type a selection [1]: 3
 
-#
 
     Step 1 of 7 | Welcome
     --------------------------------------------------------------------------------
@@ -54,7 +52,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Press "Enter" key to continue or "q" to quit: [Enter]
 
-#
 
     Step 1 of 7 | Welcome > Missing Optional Prerequisite(s)
     --------------------------------------------------------------------------------
@@ -78,13 +75,11 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 1
 
-#
 
     --------------------------------------------------------------------------------
     Do you agree to be bound by the terms and conditions of this license agreement?
     Type 'accept' to continue or 'decline' to go back to the previous menu: accept
 
-#
 
     Step 3 of 7 | Activation
     --------------------------------------------------------------------------------
@@ -108,7 +103,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 1
 
-#
 
     Step 4 of 7 | Intel(R) Software Improvement Program
     --------------------------------------------------------------------------------
@@ -132,7 +126,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection: 2
 
-#
 
     Step 5 of 7 | Options > Pre-install Summary
     --------------------------------------------------------------------------------
@@ -198,7 +191,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 2
 
-#
 
     Step 5 of 7 | Options > Architecture selection
     --------------------------------------------------------------------------------
@@ -221,7 +213,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [3]: 3
 
-#
 
     Step 5 of 7 | Options
     --------------------------------------------------------------------------------
@@ -243,7 +234,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 3
 
-#
 
     Step 5 of 7 | Options > Component selection
     --------------------------------------------------------------------------------
@@ -271,7 +261,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 8
 
-#
 
     Step 5 of 7 | Options > Component selection
     --------------------------------------------------------------------------------
@@ -299,7 +288,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 2
 
-#
 
     Step 5 of 7 | Options > Component selection
     --------------------------------------------------------------------------------
@@ -334,7 +322,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 2
 
-#
 
     Step 5 of 7 | Options > Component selection
     --------------------------------------------------------------------------------
@@ -362,7 +349,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 1
 
-#
 
     Step 5 of 7 | Options > Component selection
     --------------------------------------------------------------------------------
@@ -390,7 +376,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 1
 
-#
 
     Step 5 of 7 | Options
     --------------------------------------------------------------------------------
@@ -412,7 +397,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 1
 
-#
 
     Installation of Open Source Components
     --------------------------------------------------------------------------------
@@ -432,7 +416,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 1
 
-#
 
     Step 5 of 7 | Options > Missing Optional Prerequisite(s)
     --------------------------------------------------------------------------------
@@ -455,7 +438,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [1]: 1
 
-#
 
     Step 6 of 7 | Installation
     --------------------------------------------------------------------------------
@@ -525,7 +507,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     Press "Enter" key to continue
     [Enter]
 
-#
 
     Step 7 of 7 | Complete
     --------------------------------------------------------------------------------
@@ -547,7 +528,6 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     --------------------------------------------------------------------------------
     Please type a selection or press "Enter" to accept default choice [q]: q
 
-#
 
     $ vi ~/.bashrc
 
@@ -562,19 +542,17 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     export PATH=/home/<user>/intel/bin:$PATH
     export LD_LIBRARY_PATH=/home/<user>/intel/lib/intel64:/home/<user>/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
 
-#
 
     export PATH=/home/<user>/intel/bin:$PATH
     export LD_LIBRARY_PATH=/home/<user>/intel/lib/intel64:/home/<user>/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
 
-#### Installing OpenMPI
+### Installing OpenMPI
 
     tar zxvf sources/openmpi-1.6.5.tar.tar.gz
     cd openmpi-1.6.5/
     ./configure --prefix=/home/<user>/openmpi-install CC=icc FC=ifort F77=ifort CXX=icpc 2>&1 | tee c.txt
     make all install 2>&1 | tee m.txt
 
-#
 
     $ vi ~/.bashrc
 
@@ -589,17 +567,16 @@ My test machine is Supermicro X9DRD-7LN4F which has Intel(R) Xeon(R) CPU E5-2660
     export PATH=/home/<user>/openmpi-install/bin:/home/<user>/intel/bin:$PATH
     export LD_LIBRARY_PATH=/home/<user>/openmpi-install/lib:/home/<user>/intel/lib/intel64:/home/<user>/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
 
-#
 
     export PATH=/home/<user>/openmpi-install/bin:$PATH
     export LD_LIBRARY_PATH=/home/<user>/openmpi-install/lib:$LD_LIBRARY_PATH
 
-#### Compiling Intel MKL FFTW Interface
+### Compiling Intel MKL FFTW Interface
 
     cd ~/intel/mkl/interfaces/fftw3x_cdft/
     make libintel64 compiler=intel mpi=openmpi INSTALL_DIR=/home/<user>/fftw3x_cdft-install 2>&1 | tee m.txt
 
-#### Installing Quantum Espresso 5.0.3
+### Installing Quantum Espresso 5.0.3
 
     cd ~/sources/
     tar zxvf espresso-5.0.2.tar.gz

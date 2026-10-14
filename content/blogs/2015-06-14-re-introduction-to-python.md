@@ -14,7 +14,7 @@ Python is one of the programming languages which can claim to be both **simple**
 
 **Guido van Rossum**, the creator of the Python language, named the language after the BBC show "Monty Python's Flying Circus".
 
-### Python's Features
+## Python's Features
 
 - Simple
 - Easy to Learn
@@ -33,7 +33,7 @@ We can use `help()` function to get quick information about any function or stat
 
 ---
 
-### Python's Basics
+## Python's Basics
 
 - Literal constants `5, 3.14, 9.25e-3, 'This is a string' or "It's a string!"`
 - Numbers
@@ -59,7 +59,7 @@ We can use `help()` function to get quick information about any function or stat
 - **Explicit line joining** is writing a logical line spanning many physical lines follows.
 - **Indentation** is used to determine the indentation level of the logical line, which in turn is used to determine the grouping of statements which called **block**.
 
-### Operators and Expressions
+## Operators and Expressions
 
 - Arithmetics `+ (plus), - (minus), * (multiply), ** (power), / (division), // (floor division), % (modulo)`
 - Shifts `<< (left shift), >> (right shift)`
@@ -68,31 +68,28 @@ We can use `help()` function to get quick information about any function or stat
 - Boolean `not (boolean NOT), and (boolean AND), or (boolean OR)`
 - Operator precedence from the lowest to highest `lambda; or; and; not x; in, not in; is, is not; <, <=, >, >=, !=, ==; |; ^; &; <<, >>; +, -; *, /, %; +x, -x; ~x; **; x.attribute; x[index]; x[index:index]; f(arguments ...); (expressions, ...); [expressions, ...]; {key:datum, ...}; String conversion`
 
-### Control Flow
+## Control Flow
 
 `if` statement to check a condition and if the condition is true, we run a block of statements (called the _if-block_).
 
-{% highlight python %}
-number = 25
-guess = int(raw_input('Guess a number : '))
-if guess == number:
-print "You've guessed the number."
+    number = 25
+    guess = int(raw_input('Guess a number : '))
+    if guess == number:
+        print "You've guessed the number."
 
-# optional
+    # optional
 
-elif guess > number:
-print "The number is lower than that."
+    elif guess > number:
+        print "The number is lower than that."
 
-# optional
+    # optional
 
-else:
-print "The number is higher than that."
-print "Done."
-{% endhighlight %}
+    else:
+        print "The number is higher than that."
+    print "Done."
 
 `while` statement allows you to repeatedly execute a block of statements as long as a condition is true.
 
-    {% highlight python %}
     number = 25
     running = True
     while running:
@@ -109,7 +106,6 @@ print "Done."
     else:
      print "The game is over."
     print "Done."
-    {% endhighlight %}
 
 `for..in` statement is another looping statement which iterates over a sequence of objects.
 
@@ -146,7 +142,7 @@ print "Done."
      print 'Input is of sufficient length'
      print 'Length of the string is', len(s)
 
-### Functions
+## Functions
 
 Functions are reusable pieces of programs. They allow you to give a name to a block of statements and you can run that block using that name anywhere in your program and any number of times. This is known as calling the function.
 
@@ -236,7 +232,7 @@ _Documentation strings_ or _docstrings_ are an important tool that you should ma
     printMin(19, 13)
     print printMin.__doc__
 
-### Modules
+## Modules
 
 A module is basically a file containing all your functions and variables that you have defined. To reuse the module in other programs, the filename of the module **must** have a **.py** extension. A module can be _imported_ by another program to make use of its functionality. This is how we can use the Python standard library as well.
 
@@ -258,10 +254,11 @@ One way Python make importing a module faster is to create _byte-compiled_ files
         print 'I am being imported from another module'
 
 You can create your own module just by creating a Python source code, just make sure it has **.py** extension.
-# !/usr/bin/python # Filename: mymodule.py
-def sayhello():
-print 'Hello, this is mymodule speaking.'
-version = '0.1' # End of mymodule.py
+
+    # !/usr/bin/python # Filename: mymodule.py
+    def sayhello():
+        print 'Hello, this is mymodule speaking.'
+    version = '0.1' # End of mymodule.py
 
 Then you can import the module.
 
@@ -281,7 +278,7 @@ Then you can import the module.
 
 `del` statement is used to delete a variable/name and after the statement has run you can no longer access the variable.
 
-### Data Structures
+## Data Structures
 
 A **list** is a data structure that holds an ordered collection of items i.e. you can store a sequence of items in a list. **List** is a mutable data type i.e. this type can be altered.
 

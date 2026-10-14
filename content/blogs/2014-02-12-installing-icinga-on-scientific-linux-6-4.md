@@ -9,7 +9,7 @@ comments: true
 ---
 
 [Icinga](https://www.icinga.org/) is a well-known server or [network monitoring](http://en.wikipedia.org/wiki/Network_monitoring) that runs in many Unix/Linux distribution. Server/Network monitoring is an essential part of [Network Operations Center](http://en.wikipedia.org/wiki/Network_operations_center) because by monitoring network engineers can always get the feedback and status from network and production servers. This is a simple documentation of Icinga installation in Scientific Linux 6.4 server.
-### Getting started
+## Getting started
 Before we install icinga, it best to keep our system updated.
 
     # yum update
@@ -71,7 +71,7 @@ Add icinga user or update password of existing one using command below.
 
     # htpasswd /etc/icinga/passwd youradmin
 
-### Testing Icinga
+## Testing Icinga
 We can now access icinga via this URL on browser.
 
     http://yourdomain/icinga

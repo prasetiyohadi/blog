@@ -8,7 +8,7 @@ tags:
 comments: true
 ---
 
-### Instalation using FreeBSD ports
+## Instalation using FreeBSD ports
 
 Login as root then enter ports directory of Cyrus SASL and run following command.
 

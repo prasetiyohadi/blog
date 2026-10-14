@@ -12,7 +12,7 @@ I have run [Ghost](https://ghost.org) for quite some time now and I have been th
 
 ---
 
-### Manually upgrade Ghost
+## Manually upgrade Ghost
 
 I usually use manual upgrade method because I don't inspect the automatic scripts yet if it is compatible with my installation.
 
@@ -32,5 +32,5 @@ I usually use manual upgrade method because I don't inspect the automatic script
 
 ---
 
-### Reference
+## Reference
 <http://www.howtoinstallghost.com/how-to-update-ghost/>

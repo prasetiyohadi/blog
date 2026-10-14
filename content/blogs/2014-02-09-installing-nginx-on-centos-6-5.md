@@ -15,7 +15,7 @@ installing nginx (engine-x) in CentOS 6.5. My VPS was installed as minimal
 server and then I added new packages, such as "Development tools" group and new
 repos (EPEL, CentALT).
 
-![nginx logo](http://nginx.org/nginx.gif) in CentOS 6.5
+![nginx logo](https://nginx.org/nginx.gif) in CentOS 6.5
 
 First thing that I usually do before doing something is researching, usually.
 So, before I install nginx, I searched for tutorials and I found one in

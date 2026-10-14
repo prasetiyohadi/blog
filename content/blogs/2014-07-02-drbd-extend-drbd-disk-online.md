@@ -10,8 +10,9 @@ comments: true
 
 When using DRBD, we can grow DRBD disk online so we do not need to disturb the production process we have in the server. The requirement to this feature is the backing block device can be resized online so it is possible to resize the DRBD disk. There are two criterias that must be filled.
 
-## 1. The backing device must be managed by a logical volume manager such as LVM
-## 2. The resource must currently be in the Connected connection state.
+- The backing device must be managed by a logical volume manager such as LVM
+- The resource must currently be in the Connected connection state.
+
 First, we need to grow the backing device on both nodes and make sure only one node in Primary node.
 
     # lvextend -L 16GB /dev/VolGroup00/LogVol01

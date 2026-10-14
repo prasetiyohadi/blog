@@ -1,7 +1,9 @@
 {{- /*
   Pras' Labs search results page. PaperMod's version has its own search box. The design system allows one
   search field per page, the one in the Nav, so this page has only the results list. assets/js/fastsearch.js
-  reads ?q= from the URL, puts it in the Nav field and fills #searchResults.
+  reads ?q= from the URL, puts it in the Nav field and fills #searchResults. #searchState is a live region that
+  holds the result count or the empty, loading, no-result and error message (README "Search" and "States").
+  tabindex="-1" lets the script keep focus on the page when the button that was pressed ("Try again") goes away.
 */ -}}
 {{- define "main" }}
 
@@ -18,6 +20,8 @@
     </div>
     {{- end }}
 </header>
+
+<div id="searchState" class="pl-search-state" role="status" tabindex="-1"></div>
 
 <div id="searchbox" class="searchbox">
     <ul id="searchResults" class="searchResults" aria-label="search results"></ul>

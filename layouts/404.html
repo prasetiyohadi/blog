@@ -1,0 +1,13 @@
+{{- /*
+  Pras' Labs 404 page. PaperMod's version is the bare number "404". The design system has no 404 page; this uses
+  its state message (README "States": say what happened, then what to do, no apology, no exclamation mark) and a
+  ghost Button that goes to the post list. The h1 is for screen readers and the document title: the message below
+  it is the visible text.
+*/ -}}
+{{- define "main" }}
+<h1 class="pl-visually-hidden">Page not found</h1>
+<div class="pl-state" role="status">
+    <p>There is no page at this address. Check the link, or browse all posts.</p>
+    <a class="pl-btn pl-btn--ghost" href="{{ "blogs/" | absLangURL }}">All posts</a>
+</div>
+{{- end }}{{/* end main */ -}}

@@ -2,7 +2,7 @@
   Copy of PaperMod's layouts/list.html, changed for the Pras' Labs design system (PostCard, Button).
   Changes: pages after the first of the home list get a visually hidden h1; each entry is the pl-post-row partial instead of PaperMod's card (cover images are not shown in lists:
   PostCard has no thumbnail; the cover stays on the post page), and the pagination links have no arrow glyphs
-  (Button: "No arrow glyphs"). Everything else is the theme's.
+  (Button: "No arrow glyphs"). A list with no posts says so (README "States"). Everything else is the theme's.
 */ -}}
 {{- define "main" }}
 
@@ -62,6 +62,12 @@
 
 {{- range $paginator.Pages }}
 {{- partial "pl-post-row.html" (dict "page" . "excerpt" true) }}
+{{- end }}
+
+{{- if not $paginator.Pages }}
+<div class="pl-state">
+  <p>No posts yet. New posts appear here when they are published.</p>
+</div>
 {{- end }}
 
 {{- if gt $paginator.TotalPages 1 }}

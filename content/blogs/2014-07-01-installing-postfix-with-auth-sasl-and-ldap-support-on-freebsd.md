@@ -10,7 +10,7 @@ comments: true
 
 Install packages using FreeBSD port.
 
-### 1. Install postfix
+## 1. Install postfix
 
     # Options for postfix-2.11.0,1
     _OPTIONS_READ=postfix-2.11.0,1
@@ -36,14 +36,14 @@ Install packages using FreeBSD port.
     OPTIONS_FILE_UNSET+=SASLKRB5
     OPTIONS_FILE_UNSET+=SASLKMIT
 
-### 2. install openldap
+## 2. install openldap
 
     # Options for openldap-client-2.4.38
     _OPTIONS_READ=openldap-client-2.4.38
     _FILE_COMPLETE_OPTIONS_LIST=FETCH
     OPTIONS_FILE_UNSET+=FETCH
 
-### 3. install cyrus-sasl2
+## 3. install cyrus-sasl2
 
     # Options for cyrus-sasl-2.1.26_4
     _OPTIONS_READ=cyrus-sasl-2.1.26_4
@@ -65,7 +65,7 @@ Install packages using FreeBSD port.
     OPTIONS_FILE_SET+=PLAIN
     OPTIONS_FILE_SET+=SCRAM
 
-### 4. install cyrus-sasl2-saslauthd
+## 4. install cyrus-sasl2-saslauthd
 
     # Options for cyrus-sasl-saslauthd-2.1.26
     _OPTIONS_READ=cyrus-sasl-saslauthd-2.1.26
@@ -74,7 +74,7 @@ Install packages using FreeBSD port.
     OPTIONS_FILE_SET+=HTTPFORM
     OPTIONS_FILE_SET+=OPENLDAP
 
-### 5. install postfwd
+## 5. install postfwd
 
     # Options for postfix-postfwd-1.32_1
     _OPTIONS_READ=postfix-postfwd-1.32_1
@@ -83,13 +83,13 @@ Install packages using FreeBSD port.
     OPTIONS_FILE_SET+=EXAMPLES
     OPTIONS_FILE_UNSET+=POSTFWD2
 
-### 6. configure /usr/local/lib/sasl2/smtpd.conf
+## 6. configure /usr/local/lib/sasl2/smtpd.conf
 
     log_level: 3
     pwcheck_method: saslauthd
     mech_list: PLAIN LOGIN
 
-### 7. configure /usr/local/etc/saslauthd.conf
+## 7. configure /usr/local/etc/saslauthd.conf
 
     ldap_servers:
     ldap_bind_dn:
@@ -99,7 +99,7 @@ Install packages using FreeBSD port.
     ldap_time_limit: 4
     ldap_filter:
 
-### 8. configure /usr/local/etc/postfix/main.cf
+## 8. configure /usr/local/etc/postfix/main.cf
 
     mtpd_sasl_auth_enable = yes
     smtpd_sasl_local_domain =
@@ -114,13 +114,13 @@ Install packages using FreeBSD port.
     permit_sasl_authenticated,
     reject_unauth_destination
 
-### 9. configure /usr/local/etc/postfwd.conf
+## 9. configure /usr/local/etc/postfwd.conf
 
     id=RULE001
      sasl_username=~/^(\S+)$/
      action=rcpt(sasl_username/200/3600/DEFER Too much emails for $$sasl_username)
 
-### 10. configure /etc/rc.conf
+## 10. configure /etc/rc.conf
 
     postfix_enable="YES"
     saslauthd_enable="YES"

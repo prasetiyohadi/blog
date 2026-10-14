@@ -10,7 +10,7 @@ comments: true
 
 [Cacti](http://www.cacti.net/) is a network graphic monitoring tools which used the potential of [RRDTool](http://oss.oetiker.ch/rrdtool/). RRDTool is a data logging and graphing system for time series data. Cacti can show us a real time performance of network or servers which make this software become one of the most popular open source monitoring software.
 ![Cacti Logo](http://www.cacti.net/images/cacti_banner.png)
-### Getting Started
+## Getting Started
 Always update your box before we install new software.
 
     # yum update
@@ -27,7 +27,7 @@ Then create database for cacti.
     mysql> flush privileges;
     mysql> quit
 
-### Install SNMPD
+## Install SNMPD
 Install net-snmpd.
 
     # yum install net-snmp-utils php-snmp net-snmp-libs
@@ -51,7 +51,7 @@ Start snmpd.
     # /etc/init.d/snmpd start
     # chkconfig snmpd on
 
-### Install Cacti
+## Install Cacti
 Install cacti from EPEL Repository.
 
     # yum --enablrepo=epel install cacti
@@ -93,6 +93,6 @@ Then, run cacti installer by opening your cacti URL in web browser.
 
 Follow the instruction and wait several moment while cacti gather the data from log files. Log in to cacti and check your graph.
 
-### Reference
+## Reference
 
 > <http://www.cyberciti.biz/faq/fedora-rhel-install-cacti-monitoring-rrd-software/>

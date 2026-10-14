@@ -8,7 +8,7 @@ tags:
 comments: true
 ---
 
-### Installation using FreeBSD ports
+## Installation using FreeBSD ports
 
 Login as root, then to make sure our server's hostname can be identified locally we need to edit /etc/hosts.
 
@@ -40,7 +40,7 @@ To deactivate MySQL TCP Networking edit MySQL configuration file.
 
 Save and exit text editor.
 
-### Test MySQL Server Installation
+## Test MySQL Server Installation
 
 In order MySQL to start at boot time, edit file _/etc/rc.conf_
 

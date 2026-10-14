@@ -12,7 +12,7 @@ comments: true
 
 ![Zimbra Logo](/images/zimbrs.svg)
 
-### Getting Started
+## Getting Started
 
 Prepare the system
 
@@ -60,7 +60,7 @@ Make sure you have setup your NS records for your ZCS
     your.zimbra-domain.com IN A  192.168.1.91
           IN MX 10 your.zimbra-domain.com
 
-### Zimbra Installation
+## Zimbra Installation
 
 Download zimbra collaboration server open source edition from [here](http://files2.zimbra.com/downloads/8.0.6_GA/zcs-8.0.6_GA_5922.RHEL6_64.20131203103705.tgz)
 

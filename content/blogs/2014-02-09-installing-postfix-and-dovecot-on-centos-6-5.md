@@ -24,7 +24,7 @@ A mail server needs to have a MX record in its DNS, so make sure we have that. I
     server.net.          80528   IN      NS      ns1.server.net.
 
 ## Installing Postfix
-![Postfix Logo](http://www.postfix.org/mysza.gif)
+![Postfix Logo](https://www.postfix.org/mysza.gif)
 
 Then install Postfix using yum if it's not already installed.
 
@@ -94,7 +94,7 @@ Restart Postfix,
     # service postfix restart
 
 ## Installing Dovecot
-![Dovecot Logo](http://www.dovecot.org/dovecot.gif)
+![Dovecot Logo](https://dovecot.org/_app/immutable/assets/logo.chBTPtf0.avif)
 
 Install Dovecot using yum,
 

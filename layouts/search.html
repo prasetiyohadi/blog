@@ -4,6 +4,7 @@
   reads ?q= from the URL, puts it in the Nav field and fills #searchResults. #searchState is a live region that
   holds the result count or the empty, loading, no-result and error message (README "Search" and "States").
   tabindex="-1" lets the script keep focus on the page when the button that was pressed ("Try again") goes away.
+  The <noscript> block below is the message for visitors without JavaScript.
 */ -}}
 {{- define "main" }}
 
@@ -22,6 +23,14 @@
 </header>
 
 <div id="searchState" class="pl-search-state" role="status" tabindex="-1"></div>
+
+{{- /* Without JavaScript nothing fills the page, so say so. This is the same state message as the 404 page (what happened, then what to do, no apology). The wording is Claude's draft, not Pras' (D38). It is a sibling of #searchState so the script's replaceChildren never touches it; browsers with JavaScript do not render <noscript>. */}}
+<noscript>
+    <div class="pl-state">
+        <p>Search needs JavaScript. Turn it on, or browse all posts.</p>
+        <a class="pl-btn pl-btn--ghost" href="{{ "blogs/" | relLangURL }}">All posts</a>
+    </div>
+</noscript>
 
 <div id="searchbox" class="searchbox">
     <ul id="searchResults" class="searchResults" aria-label="search results"></ul>

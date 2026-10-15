@@ -9,7 +9,7 @@ comments: true
 ---
 
 [Cacti](http://www.cacti.net/) is a network graphic monitoring tools which used the potential of [RRDTool](http://oss.oetiker.ch/rrdtool/). RRDTool is a data logging and graphing system for time series data. Cacti can show us a real time performance of network or servers which make this software become one of the most popular open source monitoring software.
-![Cacti Logo](http://www.cacti.net/images/cacti_banner.png)
+![Cacti Logo](https://www.cacti.net/images/cacti_banner.png)
 ## Getting Started
 Always update your box before we install new software.
 

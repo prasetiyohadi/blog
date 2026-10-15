@@ -1,0 +1,55 @@
+/*
+ * About page header, from the Pras' Labs design system (github.com/pras-labs/design): ui_kits/about-consulting
+ * (.bio-full). Markup is in layouts/about.html. The kit's role line is not used (D28, D15). The avatar disc takes
+ * the tokens defined in pras-labs-author.css.
+ */
+
+/* The h1 is "text-h2" in the kit (26px to 36px, 700), not the post title size. The kit puts 4px under it before the
+   next line; with no role line the blurb gets space-3 (12px). */
+.pl-about-bio {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 64px;                  /* space-8 */
+}
+
+.pl-about-avatar {
+    flex: none;
+    width: 72px;
+    height: 72px;
+    border-radius: 999px;                 /* radius-full: reserved for Tag chips and the avatars */
+    border: 1px solid var(--pl-accent-warm-border);
+    background: var(--pl-surface-2);
+    object-fit: cover;
+}
+
+.pl-about-text {
+    min-width: 0;
+}
+
+.pl-about-text .post-title {
+    margin: 0 0 12px;                     /* space-3 */
+    font-size: clamp(26px, 2vw + 18px, 36px);
+}
+
+.pl-about-text p {
+    max-width: 58ch;
+    margin: 0;
+    font-family: var(--pl-body);
+    font-size: 1.0625rem;                 /* text-base, 17px */
+    line-height: 1.7;                     /* leading-body */
+    color: var(--secondary);
+}
+
+/* Below 480px the avatar sits above the text; below 748px the gap under the block is one register down. */
+@media (max-width: 747.98px) {
+    .pl-about-bio {
+        margin-bottom: 48px;              /* space-7 */
+    }
+}
+
+@media (max-width: 479.98px) {
+    .pl-about-bio {
+        flex-direction: column;
+    }
+}

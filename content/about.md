@@ -6,7 +6,7 @@ hidemeta: true
 ShowToc: false
 ---
 
-Strategic Infrastructure Architect with over a decade of experience driving the
+Platform Engineer with over a decade of experience driving the
 evolution of high-scale platforms. I grew alongside a major Indonesian tech
 company from startup phase to public company, and I specialize in turning
 complex, manual legacy environments into automated, high-velocity GitOps

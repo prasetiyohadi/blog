@@ -1,11 +1,11 @@
 /*
  * About page header, from the Pras' Labs design system (github.com/pras-labs/design): ui_kits/about-consulting
- * (.bio-full). Markup is in layouts/about.html. The kit's role line is not used (D28, D15). The avatar disc takes
- * the tokens defined in pras-labs-author.css.
+ * (.bio-full). Markup is in layouts/about.html. The role line is printed only when params.authorBio.aboutRole is
+ * set (D63). The avatar disc and the role color take the tokens defined in pras-labs-author.css.
  */
 
 /* The h1 is "text-h2" in the kit (26px to 36px, 700), not the post title size. The kit puts 4px under it before the
-   next line; with no role line the blurb gets space-3 (12px). */
+   role line; with no role line the blurb gets space-3 (12px). */
 .pl-about-bio {
     display: flex;
     gap: 20px;
@@ -30,6 +30,20 @@
 .pl-about-text .post-title {
     margin: 0 0 12px;                     /* space-3 */
     font-size: clamp(26px, 2vw + 18px, 36px);
+}
+
+/* Role line, as in the kit: label size, warm accent, uppercase, wide tracking, 10px above the blurb. */
+.pl-about-text--role .post-title {
+    margin-bottom: 4px;
+}
+
+.pl-about-role {
+    margin: 0 0 10px;
+    font-family: var(--pl-heading);
+    font-size: 0.875rem;                  /* text-sm, 14px */
+    letter-spacing: 0.04em;               /* tracking-wide */
+    text-transform: uppercase;
+    color: var(--pl-accent-warm);
 }
 
 .pl-about-text p {

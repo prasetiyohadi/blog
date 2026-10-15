@@ -2,7 +2,8 @@
   About page header from the design system's about-consulting kit (ui_kits/about-consulting, .bio-full): avatar, the
   name as the h1, and the bio paragraph. Used by pages with `layout: about` in front matter (content/about.md only).
   The photo, name and blurb are the same params the author bio at the end of posts uses (params.authorBio and
-  params.author in hugo.yaml). There is no role line: Pras removed it from the post bio (D28) and kept it out here.
+  params.author in hugo.yaml). The role line comes from params.authorBio.aboutRole, not from `role`: the post bio
+  prints `role` and Pras removed it there (D28), so this page has its own key (D63).
   The kit's "Consulting" sections, service cards and CTA are not built (D2, D16).
   The rest is a copy of PaperMod's single.html (pinned in scripts/fetch-theme.sh) without the page title, cover,
   table of contents, tags and share row, none of which this page uses: diff it against the theme when bumping the pin.
@@ -14,8 +15,9 @@
     {{- with site.Params.authorBio }}
     <div class="pl-about-bio">
       {{- with .avatar }}<img class="pl-about-avatar" src="{{ . | relURL }}" alt="" width="72" height="72" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:this.className}))">{{ end }}
-      <div class="pl-about-text">
+      <div class="pl-about-text{{ if .aboutRole }} pl-about-text--role{{ end }}">
         <h1 class="post-title">{{ site.Params.author }}</h1>
+        {{- with .aboutRole }}<div class="pl-about-role">{{ . }}</div>{{ end }}
         {{- with .blurb }}<p>{{ . }}</p>{{ end }}
       </div>
     </div>

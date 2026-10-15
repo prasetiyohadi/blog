@@ -51,6 +51,8 @@ params:
   # Author block at the end of every post (layouts/partials/extend_post_content.html). Text from the LinkedIn About, with "over a decade" in place of "8+ years" so it matches the description above and the About page.
   authorBio:
     avatar: "/images/avatar-me.jpg"
+    # Role line on the About page only (layouts/about.html). Not `role`: the post bio prints that key, and the role line was removed there.
+    aboutRole: "Platform Engineer"
     blurb: >-
       Infrastructure Architect with over a decade of experience driving platform evolution at scale, from bare-metal
       data centers to multi-cloud architectures serving millions of users. At Bukalapak, led the shift to

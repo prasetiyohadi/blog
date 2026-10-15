@@ -1,0 +1,22 @@
+/* Markdown tables sit in a scroll region (layouts/_markup/render-table.html).
+   The region scrolls, the table keeps its natural width, so a wide table never widens the page. */
+.md-content .pl-table-scroll {
+    overflow-x: auto;
+    max-width: 100%;
+    margin-bottom: var(--content-gap, 24px);
+}
+
+.md-content .pl-table-scroll > table {
+    /* PaperMod makes every table display:block with overflow-x:auto, a scroller a keyboard cannot reach.
+       Here the table is a plain table and the region around it is the scroller. */
+    display: table;
+    overflow: visible;
+    width: 100%;
+    max-width: none;
+    min-width: 100%;
+    margin: 0;
+}
+
+.md-content .pl-table-scroll:focus-visible {
+    outline-offset: -2px;
+}

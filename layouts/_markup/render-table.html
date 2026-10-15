@@ -1,0 +1,29 @@
+{{- /*
+  Markdown table inside a scroll region.
+  A table wider than the screen scrolls inside its own box instead of pushing the page sideways. The box is
+  focusable (tabindex="0") and has a role and a name, so a keyboard user can reach it and scroll it with the
+  arrow keys (same approach as layouts/_markup/render-codeblock.html).
+  The name is "Table N", N counting the tables on the page, so no two regions share a name (axe landmark-unique).
+*/ -}}
+<div class="pl-table-scroll" role="region" tabindex="0" aria-label="Table {{ add .Ordinal 1 }}">
+  <table{{ range $k, $v := .Attributes }}{{ printf " %s=%q" $k $v | safeHTMLAttr }}{{ end }}>
+    <thead>
+      {{- range .THead }}
+      <tr>
+        {{- range . }}
+        <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </thead>
+    <tbody>
+      {{- range .TBody }}
+      <tr>
+        {{- range . }}
+        <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>

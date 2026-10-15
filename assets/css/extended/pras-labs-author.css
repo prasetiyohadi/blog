@@ -81,6 +81,11 @@
     color: var(--pl-accent-warm);
 }
 
+/* There is no role line (params.authorBio.role is unset), so the blurb gets its own 6px gap from the name. Keep it: without it the two touch. */
+.pl-author-text .pl-author-name + p {
+    margin-top: 6px;
+}
+
 .pl-author-text p {
     max-width: 56ch;
     margin: 0;

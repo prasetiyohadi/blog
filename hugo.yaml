@@ -50,7 +50,7 @@ params:
 
   # Author block at the end of every post (layouts/partials/extend_post_content.html). Text from the LinkedIn About, with "over a decade" in place of "8+ years" so it matches the description above and the About page.
   authorBio:
-    avatar: "/images/me.jpg"
+    avatar: "/images/avatar-me.jpg"
     blurb: >-
       Infrastructure Architect with over a decade of experience driving platform evolution at scale, from bare-metal
       data centers to multi-cloud architectures serving millions of users. At Bukalapak, led the shift to
